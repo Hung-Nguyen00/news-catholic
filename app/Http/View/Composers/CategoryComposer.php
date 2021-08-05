@@ -15,7 +15,7 @@ class CategoryComposer
      */
     public function compose(View $view)
     {
-        $categories = Category::where('parent_id', 0)->with('children')->get();
+        $categories = Category::where('parent_id', 0)->with('children')->limit(4)->get();
         $view->with('categories', $categories);
     }
 }

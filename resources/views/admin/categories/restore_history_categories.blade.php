@@ -16,27 +16,16 @@
                     </ol>
                 </div>
             </div>
-
+            @if(Session::has('message'))
+                <p class="alert {{ Session::get('alert-class') }}">{{ Session::get('message') }}</p>
+            @endif
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-xxl-12 col-md-12">
                     <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">Cac bai dang</h4>
-                            <a href="{{ route('admin.posts.create') }}" class="btn btn-info" style="display: block">Add new Posts</a>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <livewire:posts.show-posts :posts="$posts"/>
-                            </div>
-                        </div>
+                        <livewire:categories.restore-category/>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-@endsection
-
-@section('script')
-    <script src="{{ URL::to('assets/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ URL::to('assets/js/plugins-init/datatables.init.js') }}"></script>
 @endsection

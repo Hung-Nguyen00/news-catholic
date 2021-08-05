@@ -27,6 +27,10 @@ class CategoryController extends Controller
     {
     }
 
+
+    public function restore(){
+        return view('admin.categories.restore_history_categories');
+    }
     /**
      * Store a newly created resource in storage.
      *

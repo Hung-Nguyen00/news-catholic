@@ -22,13 +22,7 @@
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-xxl-12 col-md-12">
                     <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">Quan ly Menu</h4>
-                            <a href="{{ route('admin.posts.create') }}" class="btn btn-info" style="display: block">Add new categories</a>
-                        </div>
-                        <div class="card-body">
-                            <livewire:categories.showcategories/>
-                        </div>
+                        <livewire:categories.showcategories/>
                     </div>
                 </div>
             </div>

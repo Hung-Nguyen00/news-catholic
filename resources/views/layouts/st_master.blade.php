@@ -200,7 +200,7 @@
                             </a>
                             <ul aria-expanded="false">
                                 <li><a href="{{ route('admin.categories.index') }}">Xem cac Menu</a></li>
-                                <li><a href="add-departments.html">Add Departments</a></li>
+                                <li><a href="{{ route('admin.category.restore') }}">Khôi phục menu</a></li>
                                 <li><a href="edit-departments.html">Edit Departments</a></li>
                             </ul>
                         </li>
@@ -251,7 +251,7 @@
     {{--<script src="{{ URL::to('assets/vendor/pickadate/picker.date.js') }}"></script>--}}
     {{--<!-- Pickdate -->--}}
     {{--<script src="{{ URL::to('assets/js/plugins-init/pickadate-init.js') }}"></script>--}}
-        @yield('script')
+    @yield('script')
     @stack('child-scripts')
 
     @endauth

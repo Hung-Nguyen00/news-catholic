@@ -1,4 +1,4 @@
-<table  id="example" class="display" style="min-width: 845px">
+    <table  id="example" class="display" style="min-width: 845px">
     <thead>
     <tr >
         <th>ID</th>
