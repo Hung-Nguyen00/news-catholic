@@ -28,61 +28,30 @@
                 <div class="col-xl-4 stretch-card grid-margin">
                     <div class="card bg-dark text-white">
                         <div class="card-body">
-                            <h2>Latest news</h2>
-
-                            <div
-                                    class="d-flex border-bottom-blue pt-3 pb-4 align-items-center justify-content-between"
-                            >
-                                <div class="pr-3">
-                                    <h5>Virus Kills Member Of Advising Iran’s Supreme</h5>
-                                    <div class="fs-12">
-                                        <span class="mr-2">Photo </span>10 Minutes ago
-                                    </div>
-                                </div>
-                                <div class="rotate-img">
-                                    <img
-                                            src="{{ asset('client/assets/images/dashboard/home_2.jpg')}}"
-                                            alt="thumb"
-                                            class="img-fluid img-lg"
-                                    />
-                                </div>
-                            </div>
-
-                            <div
-                                    class="d-flex border-bottom-blue pb-4 pt-4 align-items-center justify-content-between"
-                            >
-                                <div class="pr-3">
-                                    <h5>Virus Kills Member Of Advising Iran’s Supreme</h5>
-                                    <div class="fs-12">
-                                        <span class="mr-2">Photo </span>10 Minutes ago
-                                    </div>
-                                </div>
-                                <div class="rotate-img">
-                                    <img
-                                            src="{{ asset('client/assets/images/dashboard/home_2.jpg')}}"
-                                            alt="thumb"
-                                            class="img-fluid img-lg"
-                                    />
-                                </div>
-                            </div>
-
+                            <h2>Bài viết mới nhất</h2>
+                            @if($latest_post->count() > 0)
+                                @foreach($latest_post as $post)
                             <div
                                     class="d-flex pt-4 align-items-center justify-content-between"
                             >
                                 <div class="pr-3">
-                                    <h5>Virus Kills Member Of Advising Iran’s Supreme</h5>
+                                    <h5><a class="text-white text-decoration-none" href="">{{ $post->title }}</a></h5>
                                     <div class="fs-12">
-                                        <span class="mr-2">Photo </span>10 Minutes ago
+                                        <span class="mr-2">Photo </span>
+                                        {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
                                     </div>
                                 </div>
                                 <div class="rotate-img">
                                     <img
-                                            src="{{ asset('client/assets/images/dashboard/home_2.jpg')}}"
+                                            src="uploads/{{ $post->image }}"
+                                            style="max-width: 80%"
                                             alt="thumb"
                                             class="img-fluid img-lg"
                                     />
                                 </div>
                             </div>
+                                @endforeach
+                                @endif
                         </div>
                     </div>
                 </div>
@@ -91,20 +60,17 @@
                 <div class="col-lg-3 stretch-card grid-margin">
                     <div class="card">
                         <div class="card-body">
-                            <h2>Category</h2>
+                            <h2>Thể loại</h2>
                             <ul class="vertical-menu">
-                                <li><a href="#">Politics</a></li>
-                                <li><a href="#">International</a></li>
-                                <li><a href="#">Finance</a></li>
-                                <li><a href="#">Health care</a></li>
-                                <li><a href="#">Technology</a></li>
-                                <li><a href="#">Jobs</a></li>
-                                <li><a href="#">Media</a></li>
-                                <li><a href="#">Administration</a></li>
-                                <li><a href="#">Sports</a></li>
-                                <li><a href="#">Game</a></li>
-                                <li><a href="#">Art</a></li>
-                                <li><a href="#">Kids</a></li>
+                                @if($child_categories->count() > 0)
+                                    @foreach($child_categories as $child)
+                                        <li>
+                                            <a href="{{ route('categories.show', ['category' => $child->slug])}}">
+                                                {{ $child->name }}
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -112,8 +78,8 @@
                 <div class="col-lg-9 stretch-card grid-margin">
                     <div class="card">
                         <div class="card-body">
-                            @if($posts->count() > 0)
-                                @foreach($posts as $post)
+                            @if($top_hot_posts->count() > 0)
+                                @foreach($top_hot_posts as $post)
                                     <div class="row">
                                         <div class="col-sm-4 grid-margin">
                                             <div class="position-relative">

@@ -35,6 +35,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'check_role'], function (){
     Route::get('dashboard', [DashBoardController::class,'index'])->name('dashboard');
     Route::get('categories/restore', [CategoryController::class, 'restore'])
         ->name('admin.category.restore');
+    Route::get('posts/top-hot', [PostController::class, 'showTopHot'])->name('admin.posts.top_hot');
+    Route::post('posts/change-top-hot', [PostController::class, 'changeTopHot'])->name('admin.posts.change_top_hot');
+    Route::get('posts/bai-viet-cua-ban', [PostController::class, 'ownPost'])->name('admin.posts.own_post');
     Route::resources([
         'posts' => PostController::class,
         'categories' => CategoryController::class,

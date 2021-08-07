@@ -135,7 +135,6 @@
             }
           };
     </script>
-
     <script src="{{ URL::to('assets/vendor/summernote/js/summernote.min.js') }}"></script>
     <!-- Summernote init -->
     <script src="{{ URL::to('assets/js/plugins-init/summernote-init.js') }}"></script>

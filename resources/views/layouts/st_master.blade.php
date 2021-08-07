@@ -16,6 +16,7 @@
     <!-- Pick date -->
     <link href="{{ URL::to('assets/vendor/summernote/summernote.css') }}" rel="stylesheet">
     {{-- message toastr --}}
+
     <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
     @yield('styles')
     @livewireStyles
@@ -56,19 +57,7 @@
                 <nav class="navbar navbar-expand">
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
-                            <div class="search_bar dropdown">
-                                <span class="search_icon p-3 c-pointer" data-toggle="dropdown">
-                                    <i class="mdi mdi-magnify"></i>
-                                </span>
-                                <div class="dropdown-menu p-0 m-0">
-                                    <form>
-                                        <input class="form-control" type="search" placeholder="Search"
-                                               aria-label="Search">
-                                    </form>
-                                </div>
-                            </div>
                         </div>
-
                         <ul class="navbar-nav header-right">
                             <li class="nav-item dropdown notification_dropdown">
                                 <a class="nav-link bell ai-icon" href="#" role="button" data-toggle="dropdown">
@@ -201,22 +190,22 @@
 
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="la la-book"></i>
-                            <span class="nav-text">Quan ly bai viet</span>
+                            <span class="nav-text">Quản lý bài viết</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="{{ route('admin.posts.index') }}">Xem cac bai viet</a></li>
-                            <li><a href="add-library.html">Cac bai noi bat</a></li>
-                            <li><a href="{{ route('admin.posts.create') }}">Them bai viet</a></li>
+                            <li><a href="{{ route('admin.posts.index') }}">Các bài viết</a></li>
+                            <li><a href="{{ route('admin.posts.top_hot') }}">Bài viết nổi bật</a></li>
+                            <li><a href="{{ route('admin.posts.create') }}">Thêm bài viết</a></li>
+                            <li><a href="{{ route('admin.posts.own_post') }}">Bài viết của bạn</a></li>
                         </ul>
                     </li>
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="la la-building"></i>
-                            <span class="nav-text">Quan ly Menu</span>
+                            <span class="nav-text">Quản lý menu</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="{{ route('admin.categories.index') }}">Xem cac Menu</a></li>
+                            <li><a href="{{ route('admin.categories.index') }}">Các Menu</a></li>
                             <li><a href="{{ route('admin.category.restore') }}">Khôi phục menu</a></li>
-                            <li><a href="edit-departments.html">Edit Departments</a></li>
                         </ul>
                     </li>
 
@@ -257,12 +246,7 @@
     <script src="{{ URL::to('assets/vendor/svganimation/svg.animation.js') }}"></script>
     <script src="{{ URL::to('assets/js/styleSwitcher.js') }}"></script>
 
-    {{--<!-- pickdate -->--}}
-    {{--<script src="{{ URL::to('assets/vendor/pickadate/picker.js') }}"></script>--}}
-    {{--<script src="{{ URL::to('assets/vendor/pickadate/picker.time.js') }}"></script>--}}
-    {{--<script src="{{ URL::to('assets/vendor/pickadate/picker.date.js') }}"></script>--}}
-    {{--<!-- Pickdate -->--}}
-    {{--<script src="{{ URL::to('assets/js/plugins-init/pickadate-init.js') }}"></script>--}}
+
     @yield('script')
     @stack('child-scripts')
 

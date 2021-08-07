@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -39,17 +41,10 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
         if(Auth::id())
         {
-            $this->validate($request,  [
-                'short_description' => ['required', 'max:250'],
-                'title' => ['required'],
-                'image' => 'required', 'image|mimes:jpeg,png,jpg,gif,svg',
-                'category_id' => 'required',
-                'content_post' => 'required'
-            ]);
             // save image to  storage/public/uploads.
             $file = $request->file('image');
 
@@ -68,7 +63,7 @@ class PostController extends Controller
 
             // be like $request->user()->id
             return redirect()->route('admin.posts.index')
-                ->with('success', 'A new post posted successfully');
+                ->with('success', 'Tạo bài viết mới thành công');
         }else
         {
             return view('auth.login');
@@ -85,13 +80,31 @@ class PostController extends Controller
     {
         //
     }
+    public function ownPost()
+    {
+        $posts = Post::with(['category'])->where('user_id', Auth::id())->orderBy('created_at')->get();
+        return view('admin.posts.ownPost', compact('posts'));
+    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function showTopHot(){
+        return view('admin.posts.top_hot_posts');
+    }
+    public function changeTopHot(Request $request){
+        $current_post = Post::find($request->id);
+        $new_post = Post::find($request->new_id);
+        if ($current_post && $new_post){
+            $current_post->update(['top_hot' => 0]);
+            $new_post->update(['top_hot' => 1]);
+            Session::flash('message', 'Cập nhập thành công');
+            Session::flash('alert-class', 'alert-success');
+            return redirect()->back();
+        }
+        Session::flash('message', 'Không tìm thấy bài viết');
+        Session::flash('alert-class', 'alert-danger');
+        return redirect()->back();
+    }
+
+
     public function edit(Post $post)
     {
         $categories = Category::all();
@@ -105,16 +118,15 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdatePostRequest $request, $id)
     {
-
         $post = Post::find($id);
         if($request->image != null){
             $post->update($request->all());
         }else{
             $post->update($request->except('image'));
         }
-        Session::flash('message', 'Updated successfully!');
+        Session::flash('message', 'Cập nhập thành công');
         Session::flash('alert-class', 'alert-success');
         return redirect()->route('admin.posts.index');
     }

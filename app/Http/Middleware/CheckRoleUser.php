@@ -17,9 +17,12 @@ class CheckRoleUser
      */
     public function handle(Request $request, Closure $next)
     {
-        $user = Auth::user()->whereIn('role_id', [1,2]);
-        if ($user){
-            return $next($request);
+        if (Auth::check()){
+            $user = Auth::user()->whereIn('role_id', [1,2]);
+            if ($user){
+                return $next($request);
+            }
+            return redirect()->route('login');
         }
         return redirect()->route('login');
     }

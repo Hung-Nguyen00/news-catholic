@@ -24,9 +24,9 @@
                                 <strong class="line-height-sm"> {{ $category->name }}</strong>
                             </div>
                             <div class="col-md-4" style="text-align: end" >
-                                <button data-toggle="modal" data-target="#updateModal" wire:click="edit({{ $category->id }})"  class="btn btn-info">Sửa</button>
-                                <button data-toggle="modal" data-target="#createChildModal" wire:click="editChild({{ $category->id }})" class="btn btn-info">Thêm menu con</button>
-                                <button data-toggle="modal" data-target="#deleteModal" wire:click="edit({{ $category->id }})" class="btn btn-danger">&times;</button>
+                                <button data-toggle="modal" data-target="#updateModal" wire:click="edit({{ $category->id }})"  class="btn btn-sm btn-info">Sửa</button>
+                                <button data-toggle="modal" data-target="#createChildModal" wire:click="editChild({{ $category->id }})" class="btn  btn-sm btn-info">Thêm menu con</button>
+                                <button data-toggle="modal" data-target="#deleteModal" wire:click="edit({{ $category->id }})" class="btn  btn-sm btn-danger">&times;</button>
                             </div>
                         </div>
                         <div id="collapse{{$category->id}}" class="collapse" >
@@ -37,8 +37,8 @@
                                             <strong class="line-height-sm"> {{ $child->name }}</strong>
                                         </div>
                                         <div class="col-md-4" style="text-align: end">
-                                            <button  data-toggle="modal" data-target="#updateChildModal" wire:click="edit({{ $child->id }})"  class="btn btn-info">Sửa</button>
-                                            <button data-toggle="modal" data-target="#deleteModal" wire:click="edit({{ $child->id }})" class="btn btn-danger">&times;</button>
+                                            <button  data-toggle="modal" data-target="#updateChildModal" wire:click="edit({{ $child->id }})"  class="btn  btn-sm btn-info">Sửa</button>
+                                            <button data-toggle="modal" data-target="#deleteModal" wire:click="edit({{ $child->id }})" class="btn  btn-sm btn-danger">&times;</button>
                                         </div>
                                     </div>
                                 </div>
@@ -52,9 +52,9 @@
                                 <strong class="line-height-sm"> {{ $category->name }}</strong>
                             </div>
                             <div class="col-md-4" style="text-align: end">
-                                <button data-toggle="modal" data-target="#updateModal" wire:click="edit({{ $category->id }})"  class="btn btn-info">Sửa</button>
-                                <button data-toggle="modal" data-target="#createChildModal" wire:click="editChild({{ $category->id }})" class="btn btn-info">Thêm menu con</button>
-                                <button data-toggle="modal" data-target="#deleteModal" wire:click="edit({{ $category->id }})" class="btn btn-danger">&times;</button>
+                                <button data-toggle="modal" data-target="#updateModal" wire:click="edit({{ $category->id }})"  class="btn  btn-sm btn-info">Sửa</button>
+                                <button data-toggle="modal" data-target="#createChildModal" wire:click="editChild({{ $category->id }})" class="btn  btn-sm btn-info">Thêm menu con</button>
+                                <button data-toggle="modal" data-target="#deleteModal" wire:click="edit({{ $category->id }})" class="btn  btn-sm btn-danger">&times;</button>
                             </div>
                         </div>
                     </div>
