@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\DashBoardController;
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,9 +17,6 @@ use App\Http\Controllers\PostController;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
 
 Auth::routes();
 //Route::get('test', function(){
@@ -31,17 +31,15 @@ Auth::routes();
 Route::resources([
     'categories' => CategoryController::class,
 ]);
-Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function (){
-    Route::get('dashboard', function (){
-       return view('admin.home');
-    })->name('dashboard');
+Route::group(['prefix' => 'admin', 'middleware' => 'check_role'], function (){
+    Route::get('dashboard', [DashBoardController::class,'index'])->name('dashboard');
     Route::get('categories/restore', [CategoryController::class, 'restore'])
         ->name('admin.category.restore');
-
     Route::resources([
         'posts' => PostController::class,
         'categories' => CategoryController::class,
+        'users' => UserController::class,
     ], ['as' => 'admin']);
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');

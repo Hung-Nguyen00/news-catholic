@@ -22,7 +22,7 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label><strong>Password</strong></label>
+                                            <label><strong>Mật khẩu</strong></label>
                                             <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Enter Password">
                                             @error('password')
                                                 <span class="invalid-feedback" role="alert">
@@ -32,10 +32,8 @@
                                         </div>
                                         <div class="form-row d-flex justify-content-between mt-4 mb-2">
                                             <div class="form-group">
-                                            <div class="custom-control custom-checkbox ml-1">
-                                                    <input class="custom-control-input" type="checkbox" name="remember" id="remember" >
-                                                    <label class="custom-control-label" for="basic_checkbox_1">Remember my preference</label>
-                                                </div>
+                                                <input class="ml-2" type="checkbox">
+                                                <lable>Lưu nhớ tài khoản</lable>
                                             </div>
                                             <div class="form-group">
                                                 <a href="{{ route('password.update') }}">Forgot Password?</a>
@@ -45,9 +43,6 @@
                                             <button type="submit" class="btn btn-primary btn-block">Sign me in</button>
                                         </div>
                                     </form>
-                                    <div class="new-account mt-3">
-                                        <p>Don't have an account? <a class="text-primary" href="{{ route('register') }}">Sign up</a></p>
-                                    </div>
                                 </div>
                             </div>
                         </div>

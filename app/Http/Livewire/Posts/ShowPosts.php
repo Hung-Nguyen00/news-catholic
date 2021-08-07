@@ -15,6 +15,7 @@ class ShowPosts extends Component
         return view('livewire.posts.show-posts');
     }
 
+
     public function deletePost($id){
         $post = Post::find($id);
         if ($post)

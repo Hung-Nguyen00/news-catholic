@@ -2,8 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\DB;
 
 class PostFactory extends Factory
 {
@@ -21,13 +24,18 @@ class PostFactory extends Factory
      */
     public function definition()
     {
+        $userMin = DB::table('users')->max('id');
+        $userMax = DB::table('users')->min('id');
+        $categoryMin = DB::table('categories')->min('id');
+        $categoryMax = DB::table('categories')->max('id');
+
         return [
             'title' => $this->faker->name,
             'image' => 'download.png',
             'short_description' => $this->faker->name,
             'content' => $this->faker->text,
-            'category_id'=> 5,
-            'user_id' => 1
+            'category_id'=> rand($categoryMin, $categoryMax),
+            'user_id' => rand($userMin, $userMax),
         ];
     }
 }
