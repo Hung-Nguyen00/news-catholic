@@ -61,12 +61,16 @@
                             <h2 >Thể loại</h2>
                             <ul class="vertical-menu">
                                 @if($child_categories->count() > 0)
+                                    @php $i = 0 @endphp
                                     @foreach($child_categories as $child)
-                                        <li>
-                                            <a href="{{ route('categories.show', ['category' => $child->slug])}}">
-                                                {{ $child->name }}
-                                            </a>
-                                        </li>
+                                        @php ++$i @endphp
+                                        @if($i < 11)
+                                            <li>
+                                                <a href="{{ route('categories.show', ['category' => $child->slug])}}">
+                                                    {{ $child->name }}
+                                                </a>
+                                            </li>
+                                        @endif
                                     @endforeach
                                 @endif
                             </ul>
@@ -75,7 +79,8 @@
                 </div>
                 <div class="col-lg-9 stretch-card grid-margin">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body pb-1">
+                            <div class="card-title">Bài viết nổi bật</div>
                             @if($top_hot_posts->count() > 0)
                                 @foreach($top_hot_posts as $post)
                                     <div class="row">
@@ -152,174 +157,6 @@
                                                 @endif
                                             @endforeach
                                             @endif
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="card-title ">
-                                            Video mới nhất
-                                        </div>
-                                        <p class="mb-3">See all</p>
-                                    </div>
-                                    @if($video_posts->count() > 0)
-                                        @php $i = 0; @endphp
-                                        @foreach($video_posts as $post)
-                                            @php ++$i; @endphp
-                                            @if($i >  4 && $i < 9)
-                                                <div class="d-flex justify-content-between align-items-center border-bottom {{ $i > 5 ? 'pt-3 pb-2' : '' }}">
-                                                    <div class="div-w-100 mr-3">
-                                                        <a href="">
-                                                            <div class="rotate-img d-flex ">
-                                                                <img
-                                                                        src="uploads/{{$post->image }}"
-                                                                        alt="{{ $post->title }}"
-                                                                        style="height: 100px !important; border-radius: 5px"
-                                                                        class="img-fluid"/>
-                                                                <div class="pl-2">
-                                                                    <h5 class="font-weight-500 mb-0">
-                                                                        <a href="">{{ $post->title }}</a>
-                                                                    </h5>
-                                                                    <div class="fs-13 mb-2">
-                                                                        <span class="mr-2">Photo </span> {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-
-                                                </div>
-                                            @endif
-                                        @endforeach
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row" data-aos="fade-up">
-                <div class="col-sm-12 grid-margin">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-lg-8">
-                                    <div class="card-title">
-                                        Video
-                                    </div>
-                                    <div class="d-flex flex-wrap">
-                                        @if($video_posts->count() > 0)
-                                            @php $i = 0; @endphp
-                                            @foreach($video_posts as $post)
-                                                @php ++$i; @endphp
-                                                @if($i <  5)
-                                                    <div class="col-sm-12 col-md-6 grid-margin">
-                                                        <a href="">
-                                                            <div class="position-relative">
-                                                                <div class="rotate-img">
-                                                                    <img
-                                                                            src="uploads/{{ $post->image }}"
-                                                                            alt="{{ $post->title }}"
-                                                                            style="height: 200px !important; width: 100%"
-                                                                            class="img-fluid"/>
-                                                                </div>
-                                                                <div class="badge-positioned w-90">
-                                                                    <div class="d-flex justify-content-between align-items-center">
-                                                                        <span class="badge badge-danger font-weight-bold">{{ $post->category->name }}</span>
-                                                                        <div class="video-icon">
-                                                                            <i class="mdi mdi-play"></i>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                @endif
-                                            @endforeach
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="card-title ">
-                                            Video mới nhất
-                                        </div>
-                                        <p class="mb-3">See all</p>
-                                    </div>
-                                    @if($video_posts->count() > 0)
-                                        @php $i = 0; @endphp
-                                        @foreach($video_posts as $post)
-                                            @php ++$i; @endphp
-                                            @if($i >  4 && $i < 9)
-                                                <div class="d-flex justify-content-between align-items-center border-bottom {{ $i > 5 ? 'pt-3 pb-2' : '' }}">
-                                                    <div class="div-w-100 mr-3">
-                                                        <a href="">
-                                                            <div class="rotate-img d-flex ">
-                                                                <img
-                                                                        src="uploads/{{$post->image }}"
-                                                                        alt="{{ $post->title }}"
-                                                                        style="height: 100px !important; border-radius: 5px"
-                                                                        class="img-fluid"/>
-                                                                <div class="pl-2">
-                                                                    <h5 class="font-weight-500 mb-0">
-                                                                        <a href="">{{ $post->title }}</a>
-                                                                    </h5>
-                                                                    <div class="fs-13 mb-2">
-                                                                        <span class="mr-2">Photo </span> {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-
-                                                </div>
-                                            @endif
-                                        @endforeach
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row" data-aos="fade-up">
-                <div class="col-sm-12 grid-margin">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-lg-8">
-                                    <div class="card-title">
-                                        Video
-                                    </div>
-                                    <div class="d-flex flex-wrap">
-                                        @if($video_posts->count() > 0)
-                                            @php $i = 0; @endphp
-                                            @foreach($video_posts as $post)
-                                                @php ++$i; @endphp
-                                                @if($i <  5)
-                                                    <div class="col-sm-12 col-md-6 grid-margin">
-                                                        <a href="">
-                                                            <div class="position-relative">
-                                                                <div class="rotate-img">
-                                                                    <img
-                                                                            src="uploads/{{ $post->image }}"
-                                                                            alt="{{ $post->title }}"
-                                                                            style="height: 200px !important; width: 100%"
-                                                                            class="img-fluid"/>
-                                                                </div>
-                                                                <div class="badge-positioned w-90">
-                                                                    <div class="d-flex justify-content-between align-items-center">
-                                                                        <span class="badge badge-danger font-weight-bold">{{ $post->category->name }}</span>
-                                                                        <div class="video-icon">
-                                                                            <i class="mdi mdi-play"></i>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                @endif
-                                            @endforeach
-                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-lg-4">

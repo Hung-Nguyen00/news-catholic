@@ -610,7 +610,7 @@ pre code {
     max-width: 540px;
   }
   .position-relative .banner #title-banner{
-    top: 22% !important;
+    top: 45% !important;
   }
 }
 @media only screen and (max-width: 480px) and (min-width: 320px){
@@ -624,7 +624,7 @@ pre code {
     max-width: 720px;
   }
   .position-relative .banner #title-banner{
-    top: 50% !important;
+    top: 65% !important;
   }
 }
 
