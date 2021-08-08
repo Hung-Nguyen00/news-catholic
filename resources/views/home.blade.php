@@ -5,62 +5,60 @@
             <div class="row" data-aos="fade-up">
                 <div class="col-xl-8 stretch-card grid-margin">
                     <div class="position-relative">
-                        <img
-                                src="{{ asset('client/assets/images/dashboard/banner.jpg')}}"
-                                alt="banner"
-                                class="img-fluid"
-                        />
-                        <div class="banner-content">
-                            <div class="badge badge-danger fs-12 font-weight-bold mb-3">
-                                global news
-                            </div>
-                            <h1 class="mb-0">GLOBAL PANDEMIC</h1>
-                            <h1 class="mb-2">
-                                Coronavirus Outbreak LIVE Updates: ICSE, CBSE Exams
-                                Postponed, 168 Trains
-                            </h1>
-                            <div class="fs-12">
-                                <span class="mr-2">Photo </span>10 Minutes ago
+                        <div class="banner">
+                            <img
+                                    src="uploads/cach-cai-hinh-nen.jpg"
+                                    alt="banner"
+                                    class="img-fluid"
+                            />
+                            <div class="position-absolute text-white pl-2" id="title-banner" style="top: 50%">
+                                <div class="badge badge-danger fs-12 font-weight-bold mb-3">
+                                    global news
+                                </div>
+                                <h2 class="mb-2">
+                                    Coronavirus Outbreak LIVE Updates: ICSE, CBSE Exams
+                                    Postponed, 168 Trains
+                                </h2>
+                                <div class="fs-12">
+                                    <span class="mr-2">Photo </span>10 Minutes ago
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-4 stretch-card grid-margin">
-                    <div class="card bg-dark text-white">
-                        <div class="card-body">
-                            <h2>Bài viết mới nhất</h2>
+                    <div class="card bg-dark text-white" style="padding: 5px  5px">
+                            <h2 class="pl-3">Bài viết mới nhất</h2>
                             @if($latest_post->count() > 0)
                                 @foreach($latest_post as $post)
-                            <div
-                                    class="d-flex pt-4 align-items-center justify-content-between"
-                            >
-                                <div class="pr-3">
-                                    <h5><a class="text-white text-decoration-none" href="">{{ $post->title }}</a></h5>
-                                    <div class="fs-12">
-                                        <span class="mr-2">Photo </span>
-                                        {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
+                                <a href="" class="text-decoration-none text-white">
+                                    <div class="d-flex pt-4 align-items-center justify-content-between">
+                                        <div class="col-md-6 pr-3">
+                                            <h5>{{strlen($post->title) > 60 ? substr($post->title,0, 50)."[...]" : $post->title  }}</h5>
+                                            <div class="fs-12">
+                                                <span class="mr-2">Photo </span>
+                                                {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 rotate-img">
+                                            <img
+                                                    src="uploads/cach-cai-hinh-nen.jpg"
+                                                    alt="thumb"
+
+                                                    class="img-fluid img-lg"/>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="rotate-img">
-                                    <img
-                                            src="uploads/{{ $post->image }}"
-                                            style="max-width: 80%"
-                                            alt="thumb"
-                                            class="img-fluid img-lg"
-                                    />
-                                </div>
-                            </div>
-                                @endforeach
+                                </a>
+                            @endforeach
                                 @endif
                         </div>
-                    </div>
                 </div>
             </div>
             <div class="row" data-aos="fade-up">
                 <div class="col-lg-3 stretch-card grid-margin">
                     <div class="card">
                         <div class="card-body">
-                            <h2>Thể loại</h2>
+                            <h2 >Thể loại</h2>
                             <ul class="vertical-menu">
                                 @if($child_categories->count() > 0)
                                     @foreach($child_categories as $child)
@@ -86,23 +84,23 @@
                                                 <div class="rotate-img">
                                                     <img
                                                             src="uploads/{{$post->image}}"
-                                                            alt="thumb"
+                                                            style="height: 150px !important;"
+                                                            alt="{{ $post->title }}"
                                                             class="img-fluid"
                                                     />
                                                 </div>
                                                 <div class="badge-positioned">
-                                    <span class="badge badge-danger font-weight-bold"
-                                    >{{ $post->category->name }}</span
-                                    >
+                                                     <span class="badge badge-danger font-weight-bold"
+                                                     >{{ $post->category->name }}</span>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-sm-8  grid-margin">
                                             <h2 class="mb-2 font-weight-600">
-                                                {{ $post->title }}
+                                                <a href=""> {{ $post->title }}</a>
                                             </h2>
                                             <div class="fs-13 mb-2">
-                                                <span class="mr-2">Photo </span>10 Minutes ago
+                                                <span class="mr-2">Photo </span> {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
                                             </div>
                                             <p class="mb-0">
                                                 {{strlen($post->short_description) > 120 ? substr($post->short_description,0, 120)."..." : $post->short_description  }}
@@ -124,198 +122,75 @@
                                     <div class="card-title">
                                         Video
                                     </div>
-                                    <div class="row">
-                                        <div class="col-sm-6 grid-margin">
-                                            <div class="position-relative">
-                                                <div class="rotate-img">
-                                                    <img
-                                                            src="client/assets/images/dashboard/home_7.jpg"
-                                                            alt="thumb"
-                                                            class="img-fluid"
-                                                    />
-                                                </div>
-                                                <div class="badge-positioned w-90">
-                                                    <div
-                                                            class="d-flex justify-content-between align-items-center"
-                                                    >
-                                  <span
-                                          class="badge badge-danger font-weight-bold"
-                                  >Lifestyle</span
-                                  >
-                                                        <div class="video-icon">
-                                                            <i class="mdi mdi-play"></i>
+                                    <div class="d-flex flex-wrap">
+                                        @if($video_posts->count() > 0)
+                                            @php $i = 0; @endphp
+                                            @foreach($video_posts as $post)
+                                                @php ++$i; @endphp
+                                                @if($i <  5)
+                                                <div class="col-sm-12 col-md-6 grid-margin">
+                                                    <a href="">
+                                                        <div class="position-relative">
+                                                            <div class="rotate-img">
+                                                                <img
+                                                                        src="uploads/{{ $post->image }}"
+                                                                        alt="{{ $post->title }}"
+                                                                        style="height: 200px !important; width: 100%"
+                                                                        class="img-fluid"/>
+                                                            </div>
+                                                            <div class="badge-positioned w-90">
+                                                                <div class="d-flex justify-content-between align-items-center">
+                                                                    <span class="badge badge-danger font-weight-bold">{{ $post->category->name }}</span>
+                                                                    <div class="video-icon">
+                                                                        <i class="mdi mdi-play"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                    </a>
                                                 </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6 grid-margin">
-                                            <div class="position-relative">
-                                                <div class="rotate-img">
-                                                    <img
-                                                            src="client/assets/images/dashboard/home_8.jpg"
-                                                            alt="thumb"
-                                                            class="img-fluid"
-                                                    />
-                                                </div>
-                                                <div class="badge-positioned w-90">
-                                                    <div
-                                                            class="d-flex justify-content-between align-items-center"
-                                                    >
-                                  <span
-                                          class="badge badge-danger font-weight-bold"
-                                  >National News</span
-                                  >
-                                                        <div class="video-icon">
-                                                            <i class="mdi mdi-play"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-6 grid-margin">
-                                            <div class="position-relative">
-                                                <div class="rotate-img">
-                                                    <img
-                                                            src="client/assets/images/dashboard/home_9.jpg"
-                                                            alt="thumb"
-                                                            class="img-fluid"
-                                                    />
-                                                </div>
-                                                <div class="badge-positioned w-90">
-                                                    <div
-                                                            class="d-flex justify-content-between align-items-center"
-                                                    >
-                                  <span
-                                          class="badge badge-danger font-weight-bold"
-                                  >Lifestyle</span
-                                  >
-                                                        <div class="video-icon">
-                                                            <i class="mdi mdi-play"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6 grid-margin">
-                                            <div class="position-relative">
-                                                <div class="rotate-img">
-                                                    <img
-                                                            src="client/assets/images/dashboard/home_10.jpg"
-                                                            alt="thumb"
-                                                            class="img-fluid"
-                                                    />
-                                                </div>
-                                                <div class="badge-positioned w-90">
-                                                    <div
-                                                            class="d-flex justify-content-between align-items-center"
-                                                    >
-                                  <span
-                                          class="badge badge-danger font-weight-bold"
-                                  >National News</span
-                                  >
-                                                        <div class="video-icon">
-                                                            <i class="mdi mdi-play"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                                @endif
+                                            @endforeach
+                                            @endif
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
-                                    <div
-                                            class="d-flex justify-content-between align-items-center"
-                                    >
-                                        <div class="card-title">
-                                            Latest Video
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="card-title ">
+                                            Video mới nhất
                                         </div>
                                         <p class="mb-3">See all</p>
                                     </div>
-                                    <div
-                                            class="d-flex justify-content-between align-items-center border-bottom pb-2"
-                                    >
-                                        <div class="div-w-80 mr-3">
-                                            <div class="rotate-img">
-                                                <img
-                                                        src="client/assets/images/dashboard/home_11.jpg"
-                                                        alt="thumb"
-                                                        class="img-fluid"
-                                                />
-                                            </div>
-                                        </div>
-                                        <h3 class="font-weight-600 mb-0">
-                                            Apple Introduces Apple Watch
-                                        </h3>
-                                    </div>
-                                    <div
-                                            class="d-flex justify-content-between align-items-center border-bottom pt-3 pb-2"
-                                    >
-                                        <div class="div-w-80 mr-3">
-                                            <div class="rotate-img">
-                                                <img
-                                                        src="client/assets/images/dashboard/home_12.jpg"
-                                                        alt="thumb"
-                                                        class="img-fluid"
-                                                />
-                                            </div>
-                                        </div>
-                                        <h3 class="font-weight-600 mb-0">
-                                            SEO Strategy & Google Search
-                                        </h3>
-                                    </div>
-                                    <div
-                                            class="d-flex justify-content-between align-items-center border-bottom pt-3 pb-2"
-                                    >
-                                        <div class="div-w-80 mr-3">
-                                            <div class="rotate-img">
-                                                <img
-                                                        src="client/assets/images/dashboard/home_13.jpg"
-                                                        alt="thumb"
-                                                        class="img-fluid"
-                                                />
-                                            </div>
-                                        </div>
-                                        <h3 class="font-weight-600 mb-0">
-                                            Cycling benefit & disadvantag
-                                        </h3>
-                                    </div>
-                                    <div
-                                            class="d-flex justify-content-between align-items-center border-bottom pt-3 pb-2"
-                                    >
-                                        <div class="div-w-80 mr-3">
-                                            <div class="rotate-img">
-                                                <img
-                                                        src="client/assets/images/dashboard/home_14.jpg"
-                                                        alt="thumb"
-                                                        class="img-fluid"
-                                                />
-                                            </div>
-                                        </div>
-                                        <h3 class="font-weight-600">
-                                            The Major Health Benefits of
-                                        </h3>
-                                    </div>
-                                    <div
-                                            class="d-flex justify-content-between align-items-center pt-3"
-                                    >
-                                        <div class="div-w-80 mr-3">
-                                            <div class="rotate-img">
-                                                <img
-                                                        src="client/assets/images/dashboard/home_15.jpg"
-                                                        alt="thumb"
-                                                        class="img-fluid"
-                                                />
-                                            </div>
-                                        </div>
-                                        <h3 class="font-weight-600 mb-0">
-                                            Powerful Moments of Peace
-                                        </h3>
-                                    </div>
+                                    @if($video_posts->count() > 0)
+                                        @php $i = 0; @endphp
+                                        @foreach($video_posts as $post)
+                                            @php ++$i; @endphp
+                                            @if($i >  4 && $i < 9)
+                                                <div class="d-flex justify-content-between align-items-center border-bottom {{ $i > 5 ? 'pt-3 pb-2' : '' }}">
+                                                    <div class="div-w-100 mr-3">
+                                                        <a href="">
+                                                            <div class="rotate-img d-flex ">
+                                                                <img
+                                                                        src="uploads/{{$post->image }}"
+                                                                        alt="{{ $post->title }}"
+                                                                        style="height: 100px !important; border-radius: 5px"
+                                                                        class="img-fluid"/>
+                                                                <div class="pl-2">
+                                                                    <h5 class="font-weight-500 mb-0">
+                                                                        <a href="">{{ $post->title }}</a>
+                                                                    </h5>
+                                                                    <div class="fs-13 mb-2">
+                                                                        <span class="mr-2">Photo </span> {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -323,200 +198,174 @@
                 </div>
             </div>
             <div class="row" data-aos="fade-up">
-                <div class="col-sm-12">
+                <div class="col-sm-12 grid-margin">
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-xl-4">
+                                <div class="col-lg-8">
                                     <div class="card-title">
-                                        Sport light
+                                        Video
                                     </div>
-                                    <div class="row">
-                                        <div class="col-xl-12 col-lg-8 col-sm-12">
-                                            <div class="rotate-img">
-                                                <img
-                                                        src="client/assets/images/dashboard/home_16.jpg"
-                                                        alt="thumb"
-                                                        class="img-fluid"
-                                                />
-                                            </div>
-                                            <h2 class="mt-3 text-primary mb-2">
-                                                Newsrooms exercise..
-                                            </h2>
-                                            <p class="fs-13 mb-1 text-muted">
-                                                <span class="mr-2">Photo </span>10 Minutes ago
-                                            </p>
-                                            <p class="my-3 fs-15">
-                                                Lorem Ipsum has been the industry's standard dummy
-                                                text ever since the 1500s, when an unknown printer
-                                                took
-                                            </p>
-                                            <a href="#" class="font-weight-600 fs-16 text-dark"
-                                            >Read more</a
-                                            >
-                                        </div>
+                                    <div class="d-flex flex-wrap">
+                                        @if($video_posts->count() > 0)
+                                            @php $i = 0; @endphp
+                                            @foreach($video_posts as $post)
+                                                @php ++$i; @endphp
+                                                @if($i <  5)
+                                                    <div class="col-sm-12 col-md-6 grid-margin">
+                                                        <a href="">
+                                                            <div class="position-relative">
+                                                                <div class="rotate-img">
+                                                                    <img
+                                                                            src="uploads/{{ $post->image }}"
+                                                                            alt="{{ $post->title }}"
+                                                                            style="height: 200px !important; width: 100%"
+                                                                            class="img-fluid"/>
+                                                                </div>
+                                                                <div class="badge-positioned w-90">
+                                                                    <div class="d-flex justify-content-between align-items-center">
+                                                                        <span class="badge badge-danger font-weight-bold">{{ $post->category->name }}</span>
+                                                                        <div class="video-icon">
+                                                                            <i class="mdi mdi-play"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                @endif
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
-                                <div class="col-xl-4">
-                                    <div class="card-title">
-                                        Sport light
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xl-12 col-lg-8 col-sm-12">
-                                            <div class="rotate-img">
-                                                <img
-                                                        src="client/assets/images/dashboard/home_16.jpg"
-                                                        alt="thumb"
-                                                        class="img-fluid"
-                                                />
-                                            </div>
-                                            <h2 class="mt-3 text-primary mb-2">
-                                                Newsrooms exercise..
-                                            </h2>
-                                            <p class="fs-13 mb-1 text-muted">
-                                                <span class="mr-2">Photo </span>10 Minutes ago
-                                            </p>
-                                            <p class="my-3 fs-15">
-                                                Lorem Ipsum has been the industry's standard dummy
-                                                text ever since the 1500s, when an unknown printer
-                                                took
-                                            </p>
-                                            <a href="#" class="font-weight-600 fs-16 text-dark"
-                                            >Read more</a
-                                            >
+                                <div class="col-lg-4">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="card-title ">
+                                            Video mới nhất
                                         </div>
+                                        <p class="mb-3">See all</p>
                                     </div>
-                                </div>
-                                <div class="col-xl-4">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="card-title">
-                                                Celebrity news
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <div class="border-bottom pb-3">
-                                                        <div class="row">
-                                                            <div class="col-sm-5 pr-2">
-                                                                <div class="rotate-img">
-                                                                    <img
-                                                                            src="client/assets/images/dashboard/home_19.jpg"
-                                                                            alt="thumb"
-                                                                            class="img-fluid w-100"
-                                                                    />
+                                    @if($video_posts->count() > 0)
+                                        @php $i = 0; @endphp
+                                        @foreach($video_posts as $post)
+                                            @php ++$i; @endphp
+                                            @if($i >  4 && $i < 9)
+                                                <div class="d-flex justify-content-between align-items-center border-bottom {{ $i > 5 ? 'pt-3 pb-2' : '' }}">
+                                                    <div class="div-w-100 mr-3">
+                                                        <a href="">
+                                                            <div class="rotate-img d-flex ">
+                                                                <img
+                                                                        src="uploads/{{$post->image }}"
+                                                                        alt="{{ $post->title }}"
+                                                                        style="height: 100px !important; border-radius: 5px"
+                                                                        class="img-fluid"/>
+                                                                <div class="pl-2">
+                                                                    <h5 class="font-weight-500 mb-0">
+                                                                        <a href="">{{ $post->title }}</a>
+                                                                    </h5>
+                                                                    <div class="fs-13 mb-2">
+                                                                        <span class="mr-2">Photo </span> {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-sm-7 pl-2">
-                                                                <p class="fs-16 font-weight-600 mb-0">
-                                                                    Online shopping ..
-                                                                </p>
-                                                                <p class="fs-13 text-muted mb-0">
-                                                                    <span class="mr-2">Photo </span>10
-                                                                    Minutes ago
-                                                                </p>
-                                                                <p class="mb-0 fs-13">
-                                                                    Lorem Ipsum has been
-                                                                </p>
-                                                            </div>
-                                                        </div>
+                                                        </a>
                                                     </div>
+
                                                 </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <div class="border-bottom pb-3 pt-3">
-                                                        <div class="row">
-                                                            <div class="col-sm-5 pr-2">
-                                                                <div class="rotate-img">
-                                                                    <img
-                                                                            src="client/assets/images/dashboard/home_20.jpg"
-                                                                            alt="thumb"
-                                                                            class="img-fluid w-100"
-                                                                    />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-7 pl-2">
-                                                                <p class="fs-16 font-weight-600 mb-0">
-                                                                    Online shopping ..
-                                                                </p>
-                                                                <p class="fs-13 text-muted mb-0">
-                                                                    <span class="mr-2">Photo </span>10
-                                                                    Minutes ago
-                                                                </p>
-                                                                <p class="mb-0 fs-13">
-                                                                    Lorem Ipsum has been
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <div class="border-bottom pb-3 pt-3">
-                                                        <div class="row">
-                                                            <div class="col-sm-5 pr-2">
-                                                                <div class="rotate-img">
-                                                                    <img
-                                                                            src="client/assets/images/dashboard/home_21.jpg"
-                                                                            alt="thumb"
-                                                                            class="img-fluid w-100"
-                                                                    />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-7 pl-2">
-                                                                <p class="fs-16 font-weight-600 mb-0">
-                                                                    Online shopping ..
-                                                                </p>
-                                                                <p class="fs-13 text-muted mb-0">
-                                                                    <span class="mr-2">Photo </span>10
-                                                                    Minutes ago
-                                                                </p>
-                                                                <p class="mb-0 fs-13">
-                                                                    Lorem Ipsum has been
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <div class="pt-3">
-                                                        <div class="row">
-                                                            <div class="col-sm-5 pr-2">
-                                                                <div class="rotate-img">
-                                                                    <img
-                                                                            src="client/assets/images/dashboard/home_22.jpg"
-                                                                            alt="thumb"
-                                                                            class="img-fluid w-100"
-                                                                    />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-7 pl-2">
-                                                                <p class="fs-16 font-weight-600 mb-0">
-                                                                    Online shopping ..
-                                                                </p>
-                                                                <p class="fs-13 text-muted mb-0">
-                                                                    <span class="mr-2">Photo </span>10
-                                                                    Minutes ago
-                                                                </p>
-                                                                <p class="mb-0 fs-13">
-                                                                    Lorem Ipsum has been
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                            @endif
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="row" data-aos="fade-up">
+                <div class="col-sm-12 grid-margin">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div class="card-title">
+                                        Video
+                                    </div>
+                                    <div class="d-flex flex-wrap">
+                                        @if($video_posts->count() > 0)
+                                            @php $i = 0; @endphp
+                                            @foreach($video_posts as $post)
+                                                @php ++$i; @endphp
+                                                @if($i <  5)
+                                                    <div class="col-sm-12 col-md-6 grid-margin">
+                                                        <a href="">
+                                                            <div class="position-relative">
+                                                                <div class="rotate-img">
+                                                                    <img
+                                                                            src="uploads/{{ $post->image }}"
+                                                                            alt="{{ $post->title }}"
+                                                                            style="height: 200px !important; width: 100%"
+                                                                            class="img-fluid"/>
+                                                                </div>
+                                                                <div class="badge-positioned w-90">
+                                                                    <div class="d-flex justify-content-between align-items-center">
+                                                                        <span class="badge badge-danger font-weight-bold">{{ $post->category->name }}</span>
+                                                                        <div class="video-icon">
+                                                                            <i class="mdi mdi-play"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="card-title ">
+                                            Video mới nhất
+                                        </div>
+                                        <p class="mb-3">See all</p>
+                                    </div>
+                                    @if($video_posts->count() > 0)
+                                        @php $i = 0; @endphp
+                                        @foreach($video_posts as $post)
+                                            @php ++$i; @endphp
+                                            @if($i >  4 && $i < 9)
+                                                <div class="d-flex justify-content-between align-items-center border-bottom {{ $i > 5 ? 'pt-3 pb-2' : '' }}">
+                                                    <div class="div-w-100 mr-3">
+                                                        <a href="">
+                                                            <div class="rotate-img d-flex ">
+                                                                <img
+                                                                        src="uploads/{{$post->image }}"
+                                                                        alt="{{ $post->title }}"
+                                                                        style="height: 100px !important; border-radius: 5px"
+                                                                        class="img-fluid"/>
+                                                                <div class="pl-2">
+                                                                    <h5 class="font-weight-500 mb-0">
+                                                                        <a href="">{{ $post->title }}</a>
+                                                                    </h5>
+                                                                    <div class="fs-13 mb-2">
+                                                                        <span class="mr-2">Photo </span> {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <livewire:posts.btn-loading-posts/>
         </div>
     </div>
 @endsection

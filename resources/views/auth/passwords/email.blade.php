@@ -15,7 +15,7 @@
                                         {{ session('message') }}
                                     </div>
                                 @endif
-                                <form method="POST" action="/forget-password">
+                                <form method="POST" action="{{ route('password.email ') }}">
                                     @csrf
                                     <div class="form-group">
                                         <label><strong>Email</strong></label>

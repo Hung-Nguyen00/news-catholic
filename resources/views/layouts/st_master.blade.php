@@ -195,6 +195,7 @@
                         <ul aria-expanded="false">
                             <li><a href="{{ route('admin.posts.index') }}">Các bài viết</a></li>
                             <li><a href="{{ route('admin.posts.top_hot') }}">Bài viết nổi bật</a></li>
+                            <li><a href="{{ route('admin.posts.video') }}">Bài viết thuộc video</a></li>
                             <li><a href="{{ route('admin.posts.create') }}">Thêm bài viết</a></li>
                             <li><a href="{{ route('admin.posts.own_post') }}">Bài viết của bạn</a></li>
                         </ul>

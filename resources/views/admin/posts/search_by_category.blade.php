@@ -26,7 +26,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <livewire:posts.show-posts :posts="$posts" :categories="$categories"/>
+                                <livewire:posts.show-posts :posts="$posts" :categories="$categories" :category="$category"/>
                             </div>
                         </div>
                     </div>

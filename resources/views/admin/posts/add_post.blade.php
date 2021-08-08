@@ -23,7 +23,7 @@
                 <div class="col-xl-12 col-lg-12 col-xxl-12 col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Add Post</h4>
+                            <h4 class="card-title">Thêm bài viết mới</h4>
                         </div>
                         <div class="card-body d-flex">
                             <form method="post" class="col-xl-12 col-lg-12 col-xxl-12 col-md-12" enctype="multipart/form-data" action="{{ route('admin.posts.store') }}">
@@ -31,7 +31,7 @@
                                 <div class="d-flex">
                                     <div class="col-md-8">
                                         <div class="form-group row">
-                                            <label for="name" class="col-md-3 col-form-label">{{ __('Title') }}</label>
+                                            <label for="name" class="col-md-3 col-form-label">{{ __('Tên tiêu đề') }}</label>
                                             <div class="col-md-8">
                                                 <input id="name" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title')}}" >
                                                 @if($errors->has('title'))
@@ -42,7 +42,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="name" class="col-md-3 col-form-label">{{ __('Short Description') }}</label>
+                                            <label for="name" class="col-md-3 col-form-label">{{ __('Mô tả ngắn') }}</label>
                                             <div class="col-md-8">
                                             <textarea type="text"
                                                       class="form-control @error('short_description') is-invalid @enderror"
@@ -59,7 +59,7 @@
                                         </div>
 
                                         <div class="form-group row">
-                                            <label for="image" class="col-md-3 col-form-label">{{ __('Avatar') }}</label>
+                                            <label for="image" class="col-md-3 col-form-label">{{ __('Ảnh đại diện') }}</label>
                                             <div class="col-md-8">
                                                 <input id="image" type="file" class="form-control @error('image') is-invalid @enderror"
                                                        name="image" value="{{ old('image') }}" onchange="loadFile(event)">
@@ -74,7 +74,7 @@
                                         </div>
 
                                         <div class="form-group row">
-                                            <label for="name" class="col-md-3 col-form-label">{{ __('Category') }}</label>
+                                            <label for="name" class="col-md-3 col-form-label">{{ __('Thể loại') }}</label>
                                             <div class="col-md-8">
                                                 <select name="category_id" id="" class="form-control">
                                                     @foreach($categories as $category)
@@ -88,6 +88,7 @@
                                                 @endif
                                             </div>
                                         </div>
+
                                     </div>
                                     <div class="col-md-4">
                                         <span class="responsive-image" style="float: right;">
@@ -95,8 +96,9 @@
                                     </span>
                                     </div>
                                 </div>
+
                                 <div class="form-group row" style="margin-left: 0px">
-                                    <label for="name" class="col-md-2 col-form-label">{{ __('Content') }}</label>
+                                    <label for="name" class="col-md-2 col-form-label">{{ __('Nội dung') }}</label>
                                     <div class="col-md-10" style="padding-left: -50px">
                                         <textarea class="summernote" name="content_post" style="border-radius: 5px">
                                             {{ old('content_post')}}
@@ -107,6 +109,10 @@
                                             </div>
                                         @endif
                                     </div>
+                                </div>
+                                <div class="form-check row">
+                                    <label class="col-form-label" style="margin-right: 105px" for="exampleCheck1">Thuộc video</label>
+                                    <input type="checkbox" class="form-check-input" name="is_video" id="exampleCheck1">
                                 </div>
                                 <div class="form-group row mb-0 float-right">
                                     <div class="col-md-6">

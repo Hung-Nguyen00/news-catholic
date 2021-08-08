@@ -20,8 +20,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('category')->orderBy('created_at')->get();
-        return view('admin.posts.all_posts', compact('posts'));
+        $posts = Post::with('category')->orderBy('created_at', 'DESC')->get();
+        $categories = Category::where('parent_id', '<>', 0)->get();
+        return view('admin.posts.all_posts', compact('posts', 'categories'));
     }
 
     /**
@@ -47,10 +48,9 @@ class PostController extends Controller
         {
             // save image to  storage/public/uploads.
             $file = $request->file('image');
-
             $filename = $file->getClientOriginalName();
             $img = Image::make($file);
-            $img->resize(240, 150)->save(public_path('uploads/'.$filename));
+            $img->save(public_path('uploads/'.$filename));
             // auth before save request->all to database.
             Auth::user()->posts()->create([
                     'short_description' => $request->short_description,
@@ -58,6 +58,7 @@ class PostController extends Controller
                     'title' => $request->title,
                     'category_id' => $request->category_id,
                     'content' => $request->content_post,
+                    'is_video' => $request->is_video ? 1 : 0,
                 ]
             );
 
@@ -89,6 +90,7 @@ class PostController extends Controller
     public function showTopHot(){
         return view('admin.posts.top_hot_posts');
     }
+
     public function changeTopHot(Request $request){
         $current_post = Post::find($request->id);
         $new_post = Post::find($request->new_id);
@@ -104,6 +106,29 @@ class PostController extends Controller
         return redirect()->back();
     }
 
+
+    public function showVideo(){
+
+        $posts = Post::with('category')
+            ->orderBy('created_at', 'DESC')
+            ->where('is_video', '=', 1)
+            ->get();
+        $categories = Category::where('parent_id', '<>', 0)->get();
+        return view('admin.posts.video_posts', compact('posts', 'categories'));
+    }
+
+    public function searchByCategory(Request $request){
+        $category = Category::find($request->category_id);
+        if ($category){
+            $posts = Post::where('category_id', $request->category_id)->get();
+            $categories = Category::where('parent_id', '<>', 0)->get();
+            return view('admin.posts.search_by_category',
+                    compact('posts', 'categories','category'));
+        }else{
+            return back();
+        }
+
+    }
 
     public function edit(Post $post)
     {
@@ -122,13 +147,20 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         if($request->image != null){
-            $post->update($request->all());
+            $file = $request->file('image');
+
+            $filename = $file->getClientOriginalName();
+            $img = Image::make($file);
+            $img->save(public_path('uploads/'.$filename));
+
+            $post->update(array_merge($request->except('image'),
+                        ['is_video' => $request->is_video ? 1 : 0, 'image' => $filename]));
         }else{
-            $post->update($request->except('image'));
+            $post->update(array_merge($request->except('image'), ['is_video' => $request->is_video ? 1 : 0]));
         }
         Session::flash('message', 'Cập nhập thành công');
         Session::flash('alert-class', 'alert-success');
-        return redirect()->route('admin.posts.index');
+        return redirect()->back();
     }
 
     /**

@@ -17,7 +17,8 @@ class Post extends Model
       'category_id',
       'user_id',
         'image',
-        'top_hot'
+        'top_hot',
+        'is_video'
     ];
     public function getRouteKeyName()
     {

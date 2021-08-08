@@ -108,6 +108,10 @@
                                         @endif
                                     </div>
                                 </div>
+                                <div class="form-check row">
+                                    <label class="col-form-label" style="margin-right: 105px">Thuộc video</label>
+                                    <input type="checkbox" class="form-check-input" {{ $post->is_video == 1 ? 'checked' : ''   }} name="is_video" id="exampleCheck1">
+                                </div>
                                 <div class="form-group row mb-0 float-right">
                                     <div class="col-md-6">
                                         <button type="submit" class="btn btn-primary">

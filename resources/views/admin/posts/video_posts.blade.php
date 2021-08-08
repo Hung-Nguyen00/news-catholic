@@ -21,7 +21,7 @@
                 <div class="col-xl-12 col-lg-12 col-xxl-12 col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Các bài đăng</h4>
+                            <h4 class="card-title">Các bài đăng thuộc video</h4>
                             <a href="{{ route('admin.posts.create') }}" class="btn btn-info" style="display: block">Thêm bài viết mới</a>
                         </div>
                         <div class="card-body">

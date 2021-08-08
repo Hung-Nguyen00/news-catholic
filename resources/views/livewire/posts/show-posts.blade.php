@@ -1,3 +1,31 @@
+<form action="{{ route('admin.posts.search_category') }}">
+    <div class="col-md-12 d-flex">
+        <div class="form-group col-md-4" style="margin-left: -30px">
+            <div wire:ignore>
+                <lable class="col-form-label">Tìm kiếm bài viết theo thể loại</lable>
+                <select class="selectpicker form-control pt-1" name="category_id" data-live-search="true" >
+                   @if($category !== null)
+                        <option selected  value="{{ $category->id }}">{{ $category->name }}</option>
+                       @else
+                        <option selected  value="">Chọn thể loại</option>
+                   @endif
+                    @foreach($categories as $category)
+                        <option  value="{{ $category->id }}"> {{ $category->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            @if($errors->has('post_id'))
+                <div class="text-danger font-weight-bold mt-2 text-sm-left">
+                    {{ $errors->first('post_id') }}
+                </div>
+            @endif
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+            <button class="mt-3 btn btn-sm btn-primary">Tìm kiếm</button>
+        </div>
+    </div>
+</form>
+
 <table  id="example" class="display" style="min-width: 845px">
     <thead>
     <tr >
