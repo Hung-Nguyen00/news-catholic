@@ -42,7 +42,8 @@
                                         </div>
                                         <div class="col-md-6 rotate-img">
                                             <img
-                                                    src="uploads/cach-cai-hinh-nen.jpg"
+                                                    src="uploads/{{ $post->image }}"
+                                                    style="width: 150px; height: 80px"
                                                     alt="thumb"
 
                                                     class="img-fluid img-lg"/>

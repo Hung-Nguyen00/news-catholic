@@ -6,7 +6,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\CKEditorController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,12 +33,10 @@ Route::resources([
     'categories' => CategoryController::class,
 ]);
 
-
 Route::group(['prefix' => 'admin', 'middleware' => 'check_role'], function (){
     Route::get('dashboard', [DashBoardController::class,'index'])->name('dashboard');
     Route::get('categories/restore', [CategoryController::class, 'restore'])
         ->name('admin.category.restore');
-
     // posts
     Route::get('posts/top-hot', [PostController::class, 'showTopHot'])->name('admin.posts.top_hot');
     Route::get('posts/video', [PostController::class, 'showVideo'])->name('admin.posts.video');

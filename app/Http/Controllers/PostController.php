@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Intervention\Image\Facades\Image;
+use function Livewire\str;
 
 class PostController extends Controller
 {
@@ -52,12 +53,34 @@ class PostController extends Controller
             $img = Image::make($file);
             $img->save(public_path('uploads/'.$filename));
             // auth before save request->all to database.
+
+            $description = $request->content_post;
+
+            $dom = new \DomDocument();
+            libxml_use_internal_errors(true);
+            $dom->loadHtml($description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+            libxml_clear_errors();
+            $images = $dom->getElementsByTagName('img');
+
+            foreach($images as $k => $img){
+                $data = $img->getAttribute('src');
+                list($type, $data) = explode(';', $data);
+                list($type, $data) = explode(',', $data);
+                $data = base64_decode($data);
+                $image_name= "/uploads/" . time().$k.'.png';
+                $path = public_path() . $image_name;
+                file_put_contents($path, $data);
+                $img->removeAttribute('src');
+                $img->setAttribute('src', $image_name);
+
+            }
+            $description = $dom->saveHTML();
             Auth::user()->posts()->create([
                     'short_description' => $request->short_description,
                     'image' => $filename,
                     'title' => $request->title,
                     'category_id' => $request->category_id,
-                    'content' => $request->content_post,
+                    'content' => $description,
                     'is_video' => $request->is_video ? 1 : 0,
                 ]
             );
@@ -146,6 +169,13 @@ class PostController extends Controller
     public function update(UpdatePostRequest $request, $id)
     {
         $post = Post::find($id);
+        $description = $request->content_post;
+        $dom = new \DomDocument();
+        libxml_use_internal_errors(true);
+        $dom->loadHtml($description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        libxml_clear_errors();
+        $description = $dom->saveHTML();
+
         if($request->image != null){
             $file = $request->file('image');
 
@@ -153,10 +183,13 @@ class PostController extends Controller
             $img = Image::make($file);
             $img->save(public_path('uploads/'.$filename));
 
-            $post->update(array_merge($request->except('image'),
-                        ['is_video' => $request->is_video ? 1 : 0, 'image' => $filename]));
+            $post->update(array_merge($request->except('image', 'content_post'),
+                        ['is_video' => $request->is_video ? 1 : 0, 'image' => $filename,
+                          'content' => $description ]));
         }else{
-            $post->update(array_merge($request->except('image'), ['is_video' => $request->is_video ? 1 : 0]));
+            $post->update(array_merge($request->except('image'),
+                ['is_video' => $request->is_video ? 1 : 0,
+                'content' => $description]));
         }
         Session::flash('message', 'Cập nhập thành công');
         Session::flash('alert-class', 'alert-success');

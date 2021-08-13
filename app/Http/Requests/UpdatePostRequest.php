@@ -28,7 +28,7 @@ class UpdatePostRequest extends FormRequest
             'title' => ['required'],
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg',
             'category_id' => 'required',
-            'content_post' => 'required'
+            'content_post' => 'required|max:65000'
         ];
     }
     public function messages()
@@ -40,6 +40,7 @@ class UpdatePostRequest extends FormRequest
             'image.image'   => 'File tài lên phải là jpeg,png,jpg,gif,svg',
             'category_id'   => ':attribute không được phép trống',
             'content_post'  => ':attribute không được phép trống',
+            'content_post.max' => ':attribute chỉnh sửa không được phép thêm hình ảnh hoặc nội dung quá dài'
         ];
     }
     public function attributes()

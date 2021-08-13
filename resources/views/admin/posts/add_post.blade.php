@@ -100,9 +100,7 @@
                                 <div class="form-group row" style="margin-left: 0px">
                                     <label for="name" class="col-md-2 col-form-label">{{ __('Nội dung') }}</label>
                                     <div class="col-md-10" style="padding-left: -50px">
-                                        <textarea class="summernote" name="content_post" style="border-radius: 5px">
-                                            {{ old('content_post')}}
-                                        </textarea>
+                                        <textarea  class="summernote"  id="body" name="content_post" style="border-radius: 5px">  {{ old('content_post')}}</textarea>
                                         @if($errors->has('content_post'))
                                             <div class="text-danger font-weight-bold mt-2 text-sm-left">
                                                 {{ $errors->first('content_post') }}
@@ -131,19 +129,18 @@
     </div>
 @endsection
 
-@push('child-scripts')
+@section('script')
     <script>
         var loadFile = function(event) {
             var output = document.getElementById('output');
             output.src = URL.createObjectURL(event.target.files[0]);
             output.onload = function() {
-              URL.revokeObjectURL(output.src) // free memory
+                URL.revokeObjectURL(output.src) // free memory
             }
-          };
+        };
     </script>
-
     <script src="{{ URL::to('assets/vendor/summernote/js/summernote.min.js') }}"></script>
     <!-- Summernote init -->
     <script src="{{ URL::to('assets/js/plugins-init/summernote-init.js') }}"></script>
-@endpush
+@endsection
 

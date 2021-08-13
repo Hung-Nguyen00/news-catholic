@@ -253,5 +253,6 @@
 
 @endauth
 @livewireScripts
+
 </body>
 </html>
