@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ URL::to('assets/css/skin.css') }}">
     <!-- Pick date -->
     <link href="{{ URL::to('assets/vendor/summernote/summernote.css') }}" rel="stylesheet">
+
     {{-- message toastr --}}
 
     <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>

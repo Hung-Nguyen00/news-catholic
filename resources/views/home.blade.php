@@ -27,17 +27,16 @@
                     </div>
                 </div>
                 <div class="col-xl-4 stretch-card grid-margin">
-                    <div class="card bg-dark text-white" style="padding: 5px  5px">
+                    <div class="card bg-white text-dark" style="padding: 5px  5px">
                             <h2 class="pl-3">Bài viết mới nhất</h2>
                             @if($latest_post->count() > 0)
                                 @foreach($latest_post as $post)
-                                <a href="" class="text-decoration-none text-white">
+                                <a href="" class="text-decoration-none">
                                     <div class="d-flex pt-4 align-items-center justify-content-between">
                                         <div class="col-md-6 pr-3">
                                             <h5>{{strlen($post->title) > 60 ? substr($post->title,0, 50)."[...]" : $post->title  }}</h5>
-                                            <div class="fs-12">
-                                                <span class="mr-2">Photo </span>
-                                                {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
+                                            <div class="fs-13 text-dark">
+                                                 {{  Carbon\Carbon::parse($post->created_at)->format('d-m-Y - h:i A')  }}
                                             </div>
                                         </div>
                                         <div class="col-md-6 rotate-img">
@@ -105,8 +104,8 @@
                                             <h2 class="mb-2 font-weight-600">
                                                 <a href=""> {{ $post->title }}</a>
                                             </h2>
-                                            <div class="fs-13 mb-2">
-                                                <span class="mr-2">Photo </span> {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
+                                            <div class="fs-14 mb-2">
+                                                <span class="mr-2">Photo </span> {{  Carbon\Carbon::parse($post->created_at)->format('d-m-Y - h:i A')  }}
                                             </div>
                                             <p class="mb-0">
                                                 {{strlen($post->short_description) > 120 ? substr($post->short_description,0, 120)."..." : $post->short_description  }}
@@ -119,6 +118,7 @@
                     </div>
                 </div>
             </div>
+            @if($video_posts->count() > 0)
             <div class="row" data-aos="fade-up">
                 <div class="col-sm-12 grid-margin">
                     <div class="card">
@@ -129,7 +129,6 @@
                                         Video
                                     </div>
                                     <div class="d-flex flex-wrap">
-                                        @if($video_posts->count() > 0)
                                             @php $i = 0; @endphp
                                             @foreach($video_posts as $post)
                                                 @php ++$i; @endphp
@@ -157,7 +156,6 @@
                                                 </div>
                                                 @endif
                                             @endforeach
-                                            @endif
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
@@ -186,7 +184,7 @@
                                                                         <a href="">{{ $post->title }}</a>
                                                                     </h5>
                                                                     <div class="fs-13 mb-2">
-                                                                        <span class="mr-2">Photo </span> {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
+                                                                        <span class="mr-2">Photo </span>  {{  Carbon\Carbon::parse($post->created_at)->format('d-m-Y - h:i A')  }}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -203,6 +201,7 @@
                     </div>
                 </div>
             </div>
+            @endif
             <livewire:posts.btn-loading-posts/>
         </div>
     </div>

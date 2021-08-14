@@ -50,7 +50,11 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return view('category');
+        if ($category){
+            return view('category',  compact('category'));
+        }else{
+            return redirect()->back();
+        }
     }
 
     /**

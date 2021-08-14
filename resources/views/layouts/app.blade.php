@@ -19,7 +19,6 @@
     <link rel="stylesheet" href="{{ asset('client/assets/vendors/mdi/css/materialdesignicons.min.css')  }}"/>
     <link rel="stylesheet" href="{{ asset('client/assets/vendors/aos/dist/aos.css/aos.css') }}"/>
     <!-- End plugin css for this page -->
-    <link href="{{ URL::to('assets/vendor/summernote/summernote.css') }}" rel="stylesheet">
     <link rel="shortcut icon" href="{{ asset('client/assets/images/favicon.png') }}"/>
     <link rel="stylesheet" href="{{ asset('client/assets/css/style.css') }}"/>
     <link rel="stylesheet" href="{{ asset('client/assets/js/bootstrap.js') }}"/>
@@ -36,7 +35,7 @@
                             <div class="navbar-brand" style="width: 100%">
                                 <div class="d-flex justify-content-between align-items-center" >
                                     <div>
-                                        <a class="navbar-brand" href="#"
+                                        <a class="navbar-brand" href="{{ route('home') }}"
                                         ><img src="{{ asset('client/assets/images/logo.svg') }}" alt=""
                                             /></a>
                                     </div>
@@ -61,7 +60,7 @@
                                                 <li class="nav-item">
                                                     <a class="nav-link"
                                                        style="font-size: 16px !important;"
-                                                       href="pages/magazine.html">Home</a>
+                                                       href="{{ route('home') }}">Home</a>
                                                 </li>
                                                 @if($categories->count() > 0)
                                                     @foreach($categories as $category)
@@ -287,14 +286,7 @@
     <!-- plugin js for this page -->
     <script src="{{ asset('client/assets/vendors/aos/dist/aos.js/aos.js') }}"></script>
     <script src="{{ asset('client/assets/js/demo.js') }}"></script>
-    <script src="{{ URL::to('assets/vendor/summernote/js/summernote.min.js') }}"></script>
-    <!-- Summernote init -->
-    <script src="{{ URL::to('assets/js/plugins-init/summernote-init.js') }}"></script>
     <script src="{{ asset('client/assets/js/jquery.easeScroll.js') }}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <!-- End plugin js for this page -->
-    <!-- Custom js for this page-->
     @livewireScripts
 </body>
 </html>

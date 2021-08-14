@@ -6,17 +6,18 @@
             <div class="row page-titles mx-0">
                 <div class="col-sm-6 p-md-0">
                     <div class="welcome-text">
-                        <h4>Admin Dashboard</h4>
+                        <h4>Trang chủ</h4>
                     </div>
                 </div>
                 <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Student</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Trang chủ</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.posts.index') }}">Các bài viết</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Thêm vài viết mới</a></li>
                     </ol>
                 </div>
             </div>
-            @if(Session::has('message'))
+            @if($message)
                 <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
             @endif
             <div class="row">
@@ -47,7 +48,8 @@
                                             <textarea type="text"
                                                       class="form-control @error('short_description') is-invalid @enderror"
                                                       name="short_description"
-                                                        placeholder="short description">{{ old('short_description') ?? 'short description' }}
+                                                      style="height: 100px;"
+                                                        >{{ old('short_description') ?? 'Viết mô tả ngắn' }}
                                             </textarea>
                                                 @if($errors->has('short_description'))
                                                     <div class="text-danger font-weight-bold mt-2 text-sm-left">
@@ -96,8 +98,15 @@
                                     </span>
                                     </div>
                                 </div>
-
-                                <div class="form-group row" style="margin-left: 0px">
+                                <div class="form-check pt-2 row">
+                                    <label class="col-md-2  col-form-label" style="margin-left: -6px; margin-right: 35px;">Thuộc video</label>
+                                    <input type="checkbox" class="form-check-input" name="is_video">
+                                </div>
+                                <div class="form-check pt-2 row">
+                                    <label class="col-md-2 col-form-label" style="margin-left: -6px; margin-right: 35px;">Nội dung sao chép </label>
+                                    <input type="checkbox" class="form-check-input" name="is_copy">
+                                </div>
+                                <div class="form-group pt-2 row" style="margin-left: 0px">
                                     <label for="name" class="col-md-2 col-form-label">{{ __('Nội dung') }}</label>
                                     <div class="col-md-10" style="padding-left: -50px">
                                         <textarea  class="summernote"  id="body" name="content_post" style="border-radius: 5px">  {{ old('content_post')}}</textarea>
@@ -108,10 +117,7 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="form-check row">
-                                    <label class="col-form-label" style="margin-right: 105px" for="exampleCheck1">Thuộc video</label>
-                                    <input type="checkbox" class="form-check-input" name="is_video" id="exampleCheck1">
-                                </div>
+
                                 <div class="form-group row mb-0 float-right">
                                     <div class="col-md-6">
                                         <button type="submit" class="btn btn-primary">
@@ -139,6 +145,7 @@
             }
         };
     </script>
+
     <script src="{{ URL::to('assets/vendor/summernote/js/summernote.min.js') }}"></script>
     <!-- Summernote init -->
     <script src="{{ URL::to('assets/js/plugins-init/summernote-init.js') }}"></script>

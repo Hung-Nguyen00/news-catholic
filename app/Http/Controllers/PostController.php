@@ -53,28 +53,26 @@ class PostController extends Controller
             $img = Image::make($file);
             $img->save(public_path('uploads/'.$filename));
             // auth before save request->all to database.
-
             $description = $request->content_post;
-
-            $dom = new \DomDocument();
-            libxml_use_internal_errors(true);
-            $dom->loadHtml($description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-            libxml_clear_errors();
-            $images = $dom->getElementsByTagName('img');
-
-            foreach($images as $k => $img){
-                $data = $img->getAttribute('src');
-                list($type, $data) = explode(';', $data);
-                list($type, $data) = explode(',', $data);
-                $data = base64_decode($data);
-                $image_name= "/uploads/" . time().$k.'.png';
-                $path = public_path() . $image_name;
-                file_put_contents($path, $data);
-                $img->removeAttribute('src');
-                $img->setAttribute('src', $image_name);
-
+            if(!$request->has('is_copy')) {
+                $dom = new \DomDocument();
+                libxml_use_internal_errors(true);
+                $dom->loadHtml($description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+                libxml_clear_errors();
+                $images = $dom->getElementsByTagName('img');
+                foreach ($images as $k => $img) {
+                    $data = $img->getAttribute('src');
+                    list($type, $data) = explode(';', $data);
+                    list($type, $data) = explode(',', $data);
+                    $data = base64_decode($data);
+                    $image_name = "/uploads/" . time() . $k . '.png';
+                    $path = public_path() . $image_name;
+                    file_put_contents($path, $data);
+                    $img->removeAttribute('src');
+                    $img->setAttribute('src', $image_name);
+                }
+                $description = $dom->saveHTML();
             }
-            $description = $dom->saveHTML();
             Auth::user()->posts()->create([
                     'short_description' => $request->short_description,
                     'image' => $filename,
@@ -84,10 +82,7 @@ class PostController extends Controller
                     'is_video' => $request->is_video ? 1 : 0,
                 ]
             );
-
-            // be like $request->user()->id
-            return redirect()->route('admin.posts.index')
-                ->with('success', 'Tạo bài viết mới thành công');
+            return redirect()->route('admin.posts.index')->with(['message' => 'Tạo bài viết mới thành công']);
         }else
         {
             return view('auth.login');
@@ -100,9 +95,13 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        //
+        if ($post){
+            return view('details_post', compact('post'));
+        }else{
+            return redirect()->back();
+        }
     }
     public function ownPost()
     {
@@ -170,12 +169,6 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         $description = $request->content_post;
-        $dom = new \DomDocument();
-        libxml_use_internal_errors(true);
-        $dom->loadHtml($description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-        libxml_clear_errors();
-        $description = $dom->saveHTML();
-
         if($request->image != null){
             $file = $request->file('image');
 
@@ -191,9 +184,8 @@ class PostController extends Controller
                 ['is_video' => $request->is_video ? 1 : 0,
                 'content' => $description]));
         }
-        Session::flash('message', 'Cập nhập thành công');
-        Session::flash('alert-class', 'alert-success');
-        return redirect()->back();
+
+        return redirect()->route('admin.posts.index')->with(['message' => 'Cập nhập bài viết thành công']);
     }
 
     /**

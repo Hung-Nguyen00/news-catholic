@@ -29,10 +29,8 @@ Auth::routes();
 //    Category::withTrashed()->find(1)->forceDelete();
 //});
 
-Route::resources([
-    'categories' => CategoryController::class,
-]);
-
+Route::resource('categories', CategoryController::class)->only('show');
+Route::resource('posts', PostController::class, ['as' =>'admin'])->only('show');
 Route::group(['prefix' => 'admin', 'middleware' => 'check_role'], function (){
     Route::get('dashboard', [DashBoardController::class,'index'])->name('dashboard');
     Route::get('categories/restore', [CategoryController::class, 'restore'])
@@ -43,9 +41,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'check_role'], function (){
     Route::post('posts/change-top-hot', [PostController::class, 'changeTopHot'])->name('admin.posts.change_top_hot');
     Route::get('posts/bai-viet-cua-ban', [PostController::class, 'ownPost'])->name('admin.posts.own_post');
     Route::get('posts/search', [PostController::class, 'searchByCategory'])->name('admin.posts.search_category');
-
+    Route::resource('posts', PostController::class, ['as' =>'admin'])->except('show');
     Route::resources([
-        'posts' => PostController::class,
         'categories' => CategoryController::class,
         'users' => UserController::class,
     ], ['as' => 'admin']);

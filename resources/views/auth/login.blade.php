@@ -32,7 +32,7 @@
                                         </div>
                                         <div class="form-row d-flex justify-content-between mt-4 mb-2">
                                             <div class="form-group">
-                                                <input class="ml-2" type="checkbox">
+                                                <input class="ml-2" type="checkbox" name="remember">
                                                 <lable>Lưu nhớ tài khoản</lable>
                                             </div>
                                             <div class="form-group">

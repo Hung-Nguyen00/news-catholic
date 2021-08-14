@@ -17,8 +17,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-//        Role::create(['name' => 'Thành viên']);
-//        Role::create(['name' => 'Quản trị']);
+        Role::create(['name' => 'Thành viên']);
+        Role::create(['name' => 'Quản trị']);
          \App\Models\User::factory(10)->create();
             $this->call(CategorySeeder::class);
         $this->call(PostSeeder::class);

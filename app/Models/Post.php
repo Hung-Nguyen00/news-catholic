@@ -46,4 +46,8 @@ class Post extends Model
     public  function category(){
         return $this->belongsTo(Category::class, 'category_id');
     }
+
+    public function getNameCategory($category_id){
+        return Category::where('id', $category_id)->first()->name;
+    }
 }
