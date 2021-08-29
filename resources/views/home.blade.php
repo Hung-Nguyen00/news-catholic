@@ -6,21 +6,23 @@
                 <div class="col-xl-8 stretch-card grid-margin">
                     <div class="position-relative">
                         <div class="banner">
-                            <img
-                                    src="uploads/cach-cai-hinh-nen.jpg"
-                                    alt="banner"
-                                    class="img-fluid"
-                            />
-                            <div class="position-absolute text-white pl-2" id="title-banner" style="top: 50%">
+                            <a href="{{ route('admin.posts.show', $latest_one_post) }}">
+                                <img
+                                        src="uploads/{{ $latest_one_post->image }}"
+                                        alt="banner"
+                                        class="img-fluid"
+                                />
+                            </a>
+                            <div class="position-absolute text-white pl-2 title-banner" id="title-banner" style="top: 50%">
                                 <div class="badge badge-danger fs-12 font-weight-bold mb-3">
-                                    global news
+                                    {{ $latest_one_post->category->name }}
                                 </div>
                                 <h2 class="mb-2">
-                                    Coronavirus Outbreak LIVE Updates: ICSE, CBSE Exams
-                                    Postponed, 168 Trains
+                                    {{ $latest_one_post->short_description }}
                                 </h2>
-                                <div class="fs-12">
-                                    <span class="mr-2">Photo </span>10 Minutes ago
+                                <div class="fs-14">
+                                    <span class="mr-2">Photo </span>
+                                    {{  Carbon\Carbon::parse($latest_one_post->created_at)->format('d-m-Y - h:i A')  }}
                                 </div>
                             </div>
                         </div>
@@ -31,7 +33,7 @@
                             <h2 class="pl-3">Bài viết mới nhất</h2>
                             @if($latest_post->count() > 0)
                                 @foreach($latest_post as $post)
-                                <a href="" class="text-decoration-none">
+                                <a href="{{ route('admin.posts.show', $post) }}" class="text-decoration-none">
                                     <div class="d-flex pt-4 align-items-center justify-content-between">
                                         <div class="col-md-6 pr-3">
                                             <h5>{{strlen($post->title) > 60 ? substr($post->title,0, 50)."[...]" : $post->title  }}</h5>
@@ -86,6 +88,7 @@
                                     <div class="row">
                                         <div class="col-sm-4 grid-margin">
                                             <div class="position-relative">
+                                                <a href="{{ route('admin.posts.show', $post) }}">
                                                 <div class="rotate-img">
                                                     <img
                                                             src="uploads/{{$post->image}}"
@@ -94,15 +97,20 @@
                                                             class="img-fluid"
                                                     />
                                                 </div>
+                                                </a>
+
                                                 <div class="badge-positioned">
                                                      <span class="badge badge-danger font-weight-bold"
-                                                     >{{ $post->category->name }}</span>
+                                                     >
+                                                         @if($post->category)
+                                                         {{ $post->category->name }}</span>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-sm-8  grid-margin">
                                             <h2 class="mb-2 font-weight-600">
-                                                <a href=""> {{ $post->title }}</a>
+                                                <a href="{{ route('admin.posts.show', $post) }}"> {{ $post->title }}</a>
                                             </h2>
                                             <div class="fs-14 mb-2">
                                                 <span class="mr-2">Photo </span> {{  Carbon\Carbon::parse($post->created_at)->format('d-m-Y - h:i A')  }}
@@ -115,6 +123,13 @@
                                 @endforeach
                                 @endif
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" data-aos="fade-up">
+                <div class="col-sm-12 grid-margin">
+                    <div class="card">
+                        <img src="https://shopee.vn/hangquocte" style="width: 100%; height: 150px" alt="">
                     </div>
                 </div>
             </div>
@@ -134,7 +149,7 @@
                                                 @php ++$i; @endphp
                                                 @if($i <  5)
                                                 <div class="col-sm-12 col-md-6 grid-margin">
-                                                    <a href="">
+                                                    <a href="{{ route('admin.posts.show', $post) }}">
                                                         <div class="position-relative">
                                                             <div class="rotate-img">
                                                                 <img
@@ -172,7 +187,7 @@
                                             @if($i >  4 && $i < 9)
                                                 <div class="d-flex justify-content-between align-items-center border-bottom {{ $i > 5 ? 'pt-3 pb-2' : '' }}">
                                                     <div class="div-w-100 mr-3">
-                                                        <a href="">
+                                                        <a href="{{ route('admin.posts.show', $post) }}">
                                                             <div class="rotate-img d-flex ">
                                                                 <img
                                                                         src="uploads/{{$post->image }}"
@@ -181,7 +196,7 @@
                                                                         class="img-fluid"/>
                                                                 <div class="pl-2">
                                                                     <h5 class="font-weight-500 mb-0">
-                                                                        <a href="">{{ $post->title }}</a>
+                                                                        <a href="{{ route('admin.posts.show', $post) }}">{{ $post->title }}</a>
                                                                     </h5>
                                                                     <div class="fs-13 mb-2">
                                                                         <span class="mr-2">Photo </span>  {{  Carbon\Carbon::parse($post->created_at)->format('d-m-Y - h:i A')  }}

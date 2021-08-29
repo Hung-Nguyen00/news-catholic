@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Notifications\MailResetPasswordToken;
 
 class UserController extends Controller
 {
@@ -39,6 +40,10 @@ class UserController extends Controller
         //
     }
 
+
+    public function resetPassword($token){
+        $this->notify(new MailResetPasswordToken($token));
+    }
     /**
      * Display the specified resource.
      *

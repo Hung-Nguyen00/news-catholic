@@ -11841,7 +11841,7 @@ The smaller device rules always should write below the bigger device rules
 Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Component
 */
 [data-sidebar-style="full"][data-layout="vertical"] .menu-toggle .nav-header {
-  width: 3.75rem;
+  width: 120px;
   z-index: 999; }
   [data-sidebar-style="full"][data-layout="vertical"] .menu-toggle .nav-header .brand-logo {
     padding-left: 0;
@@ -24214,7 +24214,7 @@ table.dataTable.row-border tbody th, table.dataTable.row-border tbody td, table.
           padding: 0px 7px; }
 
 .auth-form {
-  padding: 50px 50px; }
+  padding: 40px 40px; }
   .auth-form .btn {
     height: 50px;
     font-weight: 700; }

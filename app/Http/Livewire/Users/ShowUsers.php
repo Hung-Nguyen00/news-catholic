@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Users;
 
 use App\Models\Role;
 use App\Models\User;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
@@ -38,8 +39,7 @@ class ShowUsers extends Component
         $user = User::find($user_id);
         if (Role::find($value) && $user){
             $user->update(['role_id' => $value]);
-            Session::flash('message', 'Updated successfully');
-            Session::flash('alert-class', 'alert-info');
+            Toastr::success('Cập nhập thành công', 'Thành công');
         }
         return redirect()->route('admin.users.index');
     }
@@ -47,6 +47,7 @@ class ShowUsers extends Component
     public function destroy(){
         if ($this->user){
             $this->user->delete();
+            Toastr::success('Xóa nhập thành công', 'Thành công');
         }
         return redirect()->route('admin.users.index');
     }

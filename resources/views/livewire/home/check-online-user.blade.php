@@ -19,7 +19,9 @@
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->posts->count() }}</td>
-                            <td><span class="badge badge-rounded badge-primary">Online</span></td>
+                            <td>
+                                <span class="badge badge-rounded badge-primary">Online</span>
+                            </td>
                         </tr>
                     @endif
                 @endforeach
@@ -30,7 +32,9 @@
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->posts->count() }}</td>
-                            <td><span class="badge badge-rounded badge-dark">Offline</span></td>
+                            <td>
+                                <span class="badge badge-rounded badge-dark">Offline</span>
+                            </td>
                         </tr>
                     @endif
                 @endforeach

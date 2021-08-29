@@ -6,13 +6,13 @@
             <div class="row page-titles mx-0">
                 <div class="col-sm-6 p-md-0">
                     <div class="welcome-text">
-                        <h4>Admin Dashboard</h4>
+                        <h4>Bài viết nổi bật</h4>
                     </div>
                 </div>
                 <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Student</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Trang chủ</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Bài viết nổi bật</a></li>
                     </ol>
                 </div>
             </div>
@@ -25,9 +25,6 @@
                         </div>
 
                         <div class="card-body">
-                            @if(Session::has('message'))
-                                <p class="alert {{ Session::get('alert-class') }}">{{ Session::get('message') }}</p>
-                            @endif
                             <div class="table-responsive">
                                 <livewire:posts.top-hot-posts />
                             </div>

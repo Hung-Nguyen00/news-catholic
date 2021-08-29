@@ -5,9 +5,9 @@
         <tr>
             <th scope="col" class="font-weight-bold" >STT</th>
             <th scope="col" class="font-weight-bold">Tiêu đề</th>
-            <th scope="col" class="font-weight-bold">Mô tả ngăn</th>
+            <th scope="col" class="font-weight-bold">Mô tả ngắn</th>
             <th scope="col" class="font-weight-bold">Ngày tạo</th>
-            <th scope="col" class="font-weight-bold">Trạng thái</th>
+            <th scope="col" class="font-weight-bold text-center">Trạng thái</th>
             <th scope="col" class="font-weight-bold">Xem chi tiết</th>
         </tr>
         </thead>
@@ -20,13 +20,18 @@
             <td>{{ $post->title }}</td>
             <td>{{ $post->short_description }}</td>
             <td>{{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</td>
-            <td><span class="badge badge-rounded badge-danger">Hot</span></td>
+            <td class="text-center">
+                <span class="badge badge-rounded badge-danger">Hot</span>
+            </td>
             <td>
-                <button data-toggle="modal" wire:click="edit({{ $post->id }})" data-target="#changeTopHotModal" class="btn btn-sm btn-primary">
+                <button data-toggle="modal"
+                        wire:click="edit({{ $post->id }})"
+                        data-target="#changeTopHotModal"
+                        class="btn btn-sm btn-primary">
                     Thay bài viết
                 </button>
                 <button  class="btn btn-sm btn-info">
-                    <a style="font-size: 15px" href="{{ route('admin.posts.edit', $post) }}"> Xem chi tiết</a>
+                    <a style="font-size: 14px" href="{{ route('admin.posts.edit', $post) }}"> Xem chi tiết</a>
                 </button>
             </td>
         </tr>

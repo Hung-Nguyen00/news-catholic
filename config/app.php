@@ -163,6 +163,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         \App\Providers\ComposerServiceProvider::class,
         \Intervention\Image\ImageServiceProvider::class,
+        \Brian2694\Toastr\ToastrServiceProvider::class,
         /*
          * Package Service Providers...
          */

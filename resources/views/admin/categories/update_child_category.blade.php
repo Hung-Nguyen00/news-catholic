@@ -2,7 +2,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Cập nhập tên menu</h5>
+                <h5 class="modal-title" >Cập nhập tên menu</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -10,11 +10,11 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <label for="exampleFormControlInput1">Tên</label>
+                        <label>Tên</label>
                         <input type="text"
                                class="form-control"
                                wire:model="name"
-                               id="exampleFormControlInput1" placeholder="Enter Name">
+                              placeholder="Enter Name">
                         @error('name') <span class="text-danger">{{ $message }}</span>@enderror
                     </div>
                     <div class="form-group">

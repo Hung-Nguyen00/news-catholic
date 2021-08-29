@@ -23,12 +23,20 @@ class HomeController extends Controller
     {
         $top_hot_posts = Post::with('category')->limit(3)->get();
         $child_categories = Category::where('parent_id', '<>', 0)->get();
-        $latest_post = Post::orderBy('created_at', 'DESC')->limit(3)->get();
+        $latest_one_post = Post::orderBy('created_at', 'DESC')->where('is_video', 0)->first();
+        $latest_post = Post::with('category')
+            ->orderBy('created_at', 'DESC')
+            ->where('is_video', 0)
+            ->skip(1)
+            ->take(3)
+            ->get();
         $video_posts = Post::where('is_video', 1)->orderBy('updated_at', 'DESC')->get();
-        return  view('home',
-            compact('top_hot_posts',
+
+        return  view('home', compact(
+            'top_hot_posts',
                 'child_categories',
                     'latest_post',
-                    'video_posts'));
+                    'video_posts',
+                    'latest_one_post'));
     }
 }

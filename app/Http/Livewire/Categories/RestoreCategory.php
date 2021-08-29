@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Categories;
 
 use App\Models\Category;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
@@ -35,18 +36,13 @@ class RestoreCategory extends Component
     public function restore(){
         if ($this->trashedCategory){
             $this->trashedCategory->restore();
-            $this->showMessage('Khôi phục menu con thành công', 'success');
+            Toastr::success('Khôi phục thành công', 'Thành công');
         }
     }
     public function delete(){
         if ($this->trashedCategory){
             $this->trashedCategory->forceDelete();
-            $this->showMessage('Xóa menu con thành công', 'success');
+            Toastr::success('Xóa thành công', 'Thành công');
         }
-    }
-
-    public function  showMessage($message, $type){
-        Session::flash('message', $message);
-        Session::flash('alert-class', 'alert-'.$type);
     }
 }

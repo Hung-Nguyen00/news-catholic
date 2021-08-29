@@ -10,15 +10,11 @@
                         <div class="card-body">
                             <div class="media">
                                 <span class="mr-3">
-                                    <i class="la la-users"></i>
+                                    <i class="la la-book"></i>
                                 </span>
                                 <div class="media-body text-white">
-                                    <p class="mb-1">Total Students</p>
-                                    <h3 class="text-white">3280</h3>
-                                    <div class="progress mb-2 bg-white">
-                                        <div class="progress-bar progress-animated bg-light" style="width: 80%"></div>
-                                    </div>
-                                    <small>80% Increase in 20 Days</small>
+                                    <p class="mb-1">Số lượng <br> bài viết</p>
+                                    <h5 class="text-white"> {{ $count_post }}</h5>
                                 </div>
                             </div>
                         </div>
@@ -29,15 +25,11 @@
                         <div class="card-body">
                             <div class="media">
                                 <span class="mr-3">
-                                    <i class="la la-user"></i>
+                                    <i class="la la-eye"></i>
                                 </span>
                                 <div class="media-body text-white">
-                                    <p class="mb-1">New Students</p>
-                                    <h3 class="text-white">245</h3>
-                                    <div class="progress mb-2 bg-white">
-                                        <div class="progress-bar progress-animated bg-light" style="width: 50%"></div>
-                                    </div>
-                                    <small>50% Increase in 25 Days</small>
+                                    <p class="mb-1">Số lượng <br> lượt xem</p>
+                                    <h5 class="text-white"> {{ $count_view }}</h5>
                                 </div>
                             </div>
                         </div>
@@ -48,15 +40,11 @@
                         <div class="card-body">
                             <div class="media">
                                 <span class="mr-3">
-                                    <i class="la la-graduation-cap"></i>
+                                    <i class="la la-home"></i>
                                 </span>
                                 <div class="media-body text-white">
-                                    <p class="mb-1">Total Course</p>
-                                    <h3 class="text-white">28</h3>
-                                    <div class="progress mb-2 bg-white">
-                                        <div class="progress-bar progress-animated bg-light" style="width: 76%"></div>
-                                    </div>
-                                    <small>76% Increase in 20 Days</small>
+                                    <p class="mb-1">Số lượng <br> quảng cáo</p>
+                                    <h5 class="text-white">{{ $count_advertise }}</h5>
                                 </div>
                             </div>
                         </div>
@@ -67,15 +55,11 @@
                         <div class="card-body">
                             <div class="media">
                                 <span class="mr-3">
-                                    <i class="la la-dollar"></i>
+                                    <i class="la la-users"></i>
                                 </span>
                                 <div class="media-body text-white">
-                                    <p class="mb-1">Fees Collection</p>
-                                    <h3 class="text-white">25160$</h3>
-                                    <div class="progress mb-2 bg-white">
-                                        <div class="progress-bar progress-animated bg-light" style="width: 30%"></div>
-                                    </div>
-                                    <small>30% Increase in 30 Days</small>
+                                    <p class="mb-1">Số lượng <br> thành viên </p>
+                                    <h5 class="text-white"> {{ $count_user }}</h5>
                                 </div>
                             </div>
                         </div>
@@ -134,7 +118,7 @@
         </div>
     </div>
 @endsection
-@section('script')
-    <script src="{{ URL::to('assets/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ URL::to('assets/js/plugins-init/datatables.init.js') }}"></script>
-@endsection
+    @section('script')
+        <script src="{{ URL::to('assets/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ URL::to('assets/js/plugins-init/datatables.init.js') }}"></script>
+    @endsection

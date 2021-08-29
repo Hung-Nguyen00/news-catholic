@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Posts;
 
 use App\Models\Post;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
@@ -22,11 +23,9 @@ class OwnPosts extends Component
         if ($post)
         {
             $post->delete();
-            Session::flash('message', 'Deleted successfully');
-            Session::flash('alert-class', 'alert-info');
+            Toastr::success('Xóa thành công', 'Thành công');
         }else{
-            Session::flash('message', 'Not Found');
-            Session::flash('alert-class', 'alert-danger');
+            Toastr::error('Không tìm thấy', 'Lỗi');
         }
         return redirect()->route('admin.posts.own_post');
     }

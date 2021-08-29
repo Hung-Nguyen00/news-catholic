@@ -13,12 +13,13 @@ class Post extends Model
     protected $fillable = [
       'title',
       'short_description',
+       'views',
       'content',
       'category_id',
       'user_id',
-        'image',
-        'top_hot',
-        'is_video'
+       'image',
+       'top_hot',
+       'is_video'
     ];
     public function getRouteKeyName()
     {

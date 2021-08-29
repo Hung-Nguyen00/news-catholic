@@ -6,6 +6,7 @@ use App\Http\Requests\PostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Category;
 use App\Models\Post;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -98,6 +99,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         if ($post){
+            $post->update(['views' => $post->views++]);
             return view('details_post', compact('post'));
         }else{
             return redirect()->back();
@@ -123,8 +125,7 @@ class PostController extends Controller
             Session::flash('alert-class', 'alert-success');
             return redirect()->back();
         }
-        Session::flash('message', 'Không tìm thấy bài viết');
-        Session::flash('alert-class', 'alert-danger');
+        Toastr::error('Không tìm thấy', 'Lỗi');
         return redirect()->back();
     }
 

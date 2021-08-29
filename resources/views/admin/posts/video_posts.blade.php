@@ -6,13 +6,13 @@
             <div class="row page-titles mx-0">
                 <div class="col-sm-6 p-md-0">
                     <div class="welcome-text">
-                        <h4>Admin Dashboard</h4>
+                        <h4>Bài viết thuộc video</h4>
                     </div>
                 </div>
                 <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Student</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Trang chủ</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Bài viết thuộc video</a></li>
                     </ol>
                 </div>
             </div>
@@ -21,8 +21,8 @@
                 <div class="col-xl-12 col-lg-12 col-xxl-12 col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Các bài đăng thuộc video</h4>
-                            <a href="{{ route('admin.posts.create') }}" class="btn btn-info" style="display: block">Thêm bài viết mới</a>
+                            <h4 class="card-title">Các bài viết thuộc video</h4>
+                            <a href="{{ route('admin.posts.create') }}" class="btn btn-primary btn-sm" style="display: block">Thêm bài viết mới</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">

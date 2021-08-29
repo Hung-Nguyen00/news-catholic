@@ -5,7 +5,12 @@
                 {{  $post->title }}
             </h2>
             <div>
-                <span class="badge badge-pill badge-danger" style="padding: 5px 10px">{{ $post->getNameCategory($post->category_id) }}</span>
+                <span class="badge badge-pill badge-danger" style="padding: 5px 10px">
+                    {{ $post->getNameCategory($post->category_id) }}
+                </span>
+                <p class="fs-13">
+                    {{  Carbon\Carbon::parse($post->created_at)->format('d-m-Y - h:i A')  }}
+                </p>
             </div>
         </div>
     </div>
@@ -32,7 +37,7 @@
                                                 </h5>
                                                 <p class="fs-13 text-muted mb-0">
                                                     <span class="mr-2">{{ $post->is_video ? 'Video' : 'Hình ảnh' }} </span>
-                                                    {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
+                                                    {{ Carbon\Carbon::parse($post->created_at)->format('d-m-Y - h:i A') }}
                                                 </p>
                                             </div>
                                             <div class="col-sm-5">
@@ -68,7 +73,7 @@
                                                     </h5>
                                                     <p class="fs-13 text-muted mb-0">
                                                         <span class="mr-2">{{ $post->is_video ? 'Video' : 'Hình ảnh' }} </span>
-                                                        {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
+                                                        {{Carbon\Carbon::parse($post->created_at)->format('d-m-Y - h:i A') }}
                                                     </p>
                                                 </div>
                                                 <div class="col-sm-5">

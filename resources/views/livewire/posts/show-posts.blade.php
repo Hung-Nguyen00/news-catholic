@@ -49,8 +49,13 @@
                 <td style="width: 170px"> {{  Carbon\Carbon::parse($post->created_at)->format('d-m-Y - h:i A')  }}</td>
                 @if(Auth::user()->role_id == 2)
                 <td style="width: 70px">
-                    <a href="{{ route('admin.posts.edit', $post)}}" class="btn btn-sm btn-primary"><i class="la la-pencil"></i></a>
-                    <button wire:click="deletePost({{ $post->id }})" onclick="return confirm('Are you sure to want to delete it?')" class="btn btn-sm btn-danger">
+                    <a href="{{ route('admin.posts.edit', $post)}}"
+                       class="btn btn-sm btn-primary">
+                        <i class="la la-pencil"></i>
+                    </a>
+                    <button wire:click="deletePost({{ $post->id }})"
+                            onclick="return confirm('Bạn chắc chắn muốn xóa bài viết này chứ')"
+                            class="btn btn-sm btn-danger">
                         <i class="la la-trash-o"></i>
                     </button>
                 </td>

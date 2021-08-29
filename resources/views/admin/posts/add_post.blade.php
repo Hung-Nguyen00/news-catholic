@@ -6,25 +6,22 @@
             <div class="row page-titles mx-0">
                 <div class="col-sm-6 p-md-0">
                     <div class="welcome-text">
-                        <h4>Trang chủ</h4>
+                        <h4>Thêm bài viết</h4>
                     </div>
                 </div>
                 <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Trang chủ</a></li>
                         <li class="breadcrumb-item"><a href="{{ route('admin.posts.index') }}">Các bài viết</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Thêm vài viết mới</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Thêm bài viết</a></li>
                     </ol>
                 </div>
             </div>
-            @if($message)
-                <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
-            @endif
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-xxl-12 col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Thêm bài viết mới</h4>
+                            <h4 class="card-title">Thêm bài viết</h4>
                         </div>
                         <div class="card-body d-flex">
                             <form method="post" class="col-xl-12 col-lg-12 col-xxl-12 col-md-12" enctype="multipart/form-data" action="{{ route('admin.posts.store') }}">

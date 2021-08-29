@@ -6,13 +6,13 @@
             <div class="row page-titles mx-0">
                 <div class="col-sm-6 p-md-0">
                     <div class="welcome-text">
-                        <h4>Admin Dashboard</h4>
+                        <h4>Bài viết của bạn</h4>
                     </div>
                 </div>
                 <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('home') }}">Trang chủ</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Quản lý bài viết</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Bài viết của bạn</a></li>
                     </ol>
                 </div>
             </div>
@@ -22,7 +22,8 @@
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">Các bài viết của bạn</h4>
-                            <a href="{{ route('admin.posts.create') }}" class="btn btn-info" style="display: block">Add new Posts</a>
+                            <a href="{{ route('admin.posts.create') }}"
+                               class="btn btn-primary btn-sm" style="display: block">Thêm bài viết</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">

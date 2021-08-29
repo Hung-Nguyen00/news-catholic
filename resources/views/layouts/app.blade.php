@@ -7,10 +7,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Catholic') }}</title>
+    <title>Phụng Thiên</title>
 
     <!-- Scripts -->
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -29,15 +28,16 @@
         <div class="container-scroller">
             <div class="main-panel">
                 <!-- partial:partials/_navbar.html -->
-                <header id="header">
+                <header id="header shadow-b dark:bg-dark">
                     <div class="container">
                         <nav class="navbar navbar-expand-lg navbar-light">
                             <div class="navbar-brand" style="width: 100%">
                                 <div class="d-flex justify-content-between align-items-center" >
                                     <div>
-                                        <a class="navbar-brand" href="{{ route('home') }}"
-                                        ><img src="{{ asset('client/assets/images/logo.svg') }}" alt=""
-                                            /></a>
+                                        <a class="navbar-brand d-flex justify-content-center align-items-center" href="{{ route('home') }}"
+                                        ><img src="{{ asset($contact->logo) }}" style="width: 40px; height: 40px;" alt=""/>
+                                            <span class="ml-2 text-white text-uppercase">{{ $contact->name_website }}</span>
+                                        </a>
                                     </div>
                                     <div>
                                         <button
@@ -46,21 +46,16 @@
                                                 data-target="#navbarSupportedContent"
                                                 aria-controls="navbarSupportedContent"
                                                 aria-expanded="false"
-                                                aria-label="Toggle navigation"
-                                        >
+                                                aria-label="Toggle navigation">
                                             <span class="navbar-toggler-icon"></span>
                                         </button>
-                                        <div
-                                                class="navbar-collapse justify-content-center collapse"
-                                                id="navbarSupportedContent"
-                                        >
-                                            <ul
-                                                    class="navbar-nav d-lg-flex justify-content-between align-items-center"
-                                            >
+                                        <div class="navbar-collapse justify-content-center collapse"
+                                                id="navbarSupportedContent">
+                                            <ul class="navbar-nav d-lg-flex justify-content-between align-items-center">
                                                 <li class="nav-item">
                                                     <a class="nav-link"
                                                        style="font-size: 16px !important;"
-                                                       href="{{ route('home') }}">Home</a>
+                                                       href="{{ route('home') }}">Trang chủ</a>
                                                 </li>
                                                 @if($categories->count() > 0)
                                                     @foreach($categories as $category)
@@ -97,21 +92,13 @@
                                     </div>
                                     <div>
                                         <ul class="social-media">
-                                            <li>
-                                                <a href="#">
-                                                    <i class="mdi mdi-facebook"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <i class="mdi mdi-youtube"></i>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <i class="mdi mdi-twitter"></i>
-                                                </a>
-                                            </li>
+                                            @foreach($socials as $s)
+                                                <li>
+                                                    <a href="{{ $s->url }}">
+                                                        <i class="mdi {{ $s->name_social }}"></i>
+                                                    </a>
+                                                </li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>
@@ -119,11 +106,6 @@
                         </nav>
                     </div>
                 </header>
-                {{--<div class="form-group">--}}
-                    {{--<label> Description </label>--}}
-                    {{--<textarea class="form-control" style="height: 100vh; width: 500px" id="editor"--}}
-                              {{--placeholder="Enter the Description" name="editor"></textarea>--}}
-                {{--</div>--}}
                 <main>
                     @yield('content')
                 </main>
@@ -132,143 +114,41 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-sm-5">
-                                    <img src="client/assets/images/logo.svg" class="footer-logo" alt="" />
-                                    <h5 class="font-weight-normal mt-4 mb-5">
-                                        Newspaper is your news, entertainment, music fashion website. We
-                                        provide you with the latest breaking news and videos straight from
-                                        the entertainment industry.
+                                    <div class="d-flex align-items-center">
+                                            <img src="{{ asset($contact->logo) }}"
+                                             style="width: 70px; height: 70px"
+                                             class="footer-logo" alt="" />
+                                        <span class="text-uppercase font-weight-bold ml-2" style="font-size: 25px">{{ $contact->name_website }}</span>
+                                    </div>
+                                    <h5 class="font-weight-normal mt-2 mb-3">
+                                        {{ $contact->description }}
                                     </h5>
-                                    <ul class="social-media mb-3">
-                                        <li>
-                                            <a href="#">
-                                                <i class="mdi mdi-facebook"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="mdi mdi-youtube"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="mdi mdi-twitter"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-sm-4">
-                                    <h3 class="font-weight-bold mb-3">RECENT POSTS</h3>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="footer-border-bottom pb-2">
-                                                <div class="row">
-                                                    <div class="col-3">
-                                                        <img
-                                                                src="{{ asset('client/assets/images/dashboard/home_1.jpg') }}"
-                                                                alt="thumb"
-                                                                class="img-fluid"
-                                                        />
-                                                    </div>
-                                                    <div class="col-9">
-                                                        <h5 class="font-weight-600">
-                                                            Cotton import from USA to soar was American traders
-                                                            predict
-                                                        </h5>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="footer-border-bottom pb-2 pt-2">
-                                                <div class="row">
-                                                    <div class="col-3">
-                                                        <img
-                                                                src="client/assets/images/dashboard/home_2.jpg"
-                                                                alt="thumb"
-                                                                class="img-fluid"
-                                                        />
-                                                    </div>
-                                                    <div class="col-9">
-                                                        <h5 class="font-weight-600">
-                                                            Cotton import from USA to soar was American traders
-                                                            predict
-                                                        </h5>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div>
-                                                <div class="row">
-                                                    <div class="col-3">
-                                                        <img
-                                                                src="client/assets/images/dashboard/home_3.jpg"
-                                                                alt="thumb"
-                                                                class="img-fluid"
-                                                        />
-                                                    </div>
-                                                    <div class="col-9">
-                                                        <h5 class="font-weight-600 mb-3">
-                                                            Cotton import from USA to soar was American traders
-                                                            predict
-                                                        </h5>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <h2 class="text-uppercase mb-3">Liên hệ quảng cáo</h2>
+                                    <div class="d-flex flex-wrap align-content-end">
+                                        <h2 class="mr-3 text-uppercase" style="margin-bottom: -10px;">{{ $contact->number_phone }}</h2>
+                                        <ul class="social-media">
+                                            @foreach($socials as $s)
+                                            <li>
+                                                <a href="{{ $s->url }}">
+                                                    <i class="mdi {{ $s->name_social }}"></i>
+                                                </a>
+                                            </li>
+                                            @endforeach
+                                        </ul>
                                     </div>
                                 </div>
-                                <div class="col-sm-3">
-                                    <h3 class="font-weight-bold mb-3">CATEGORIES</h3>
-                                    <div class="footer-border-bottom pb-2">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h5 class="mb-0 font-weight-600">Magazine</h5>
-                                            <div class="count">1</div>
-                                        </div>
-                                    </div>
-                                    <div class="footer-border-bottom pb-2 pt-2">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h5 class="mb-0 font-weight-600">Business</h5>
-                                            <div class="count">1</div>
-                                        </div>
-                                    </div>
-                                    <div class="footer-border-bottom pb-2 pt-2">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h5 class="mb-0 font-weight-600">Sports</h5>
-                                            <div class="count">1</div>
-                                        </div>
-                                    </div>
-                                    <div class="footer-border-bottom pb-2 pt-2">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h5 class="mb-0 font-weight-600">Arts</h5>
-                                            <div class="count">1</div>
-                                        </div>
-                                    </div>
-                                    <div class="pt-2">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h5 class="mb-0 font-weight-600">Politics</h5>
-                                            <div class="count">1</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="footer-bottom">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="d-sm-flex justify-content-between align-items-center">
-                                        <div class="fs-14 font-weight-600">
-                                            © 2020 @ <a href="https://www.bootstrapdash.com/" target="_blank" class="text-white"> BootstrapDash</a>. All rights reserved.
-                                        </div>
-                                        <div class="fs-14 font-weight-600">
-                                            Handcrafted by <a href="https://www.bootstrapdash.com/" target="_blank" class="text-white">BootstrapDash</a>
-                                        </div>
+                                <div class="col-sm-7">
+                                    <div class="d-flex flex-wrap  justify-content-between">
+                                        @foreach($category_footer as $category)
+                                            <div class="col-md-4 pl-0 pr-0 mb-3">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <h5 class="mb-0 font-weight-600">
+                                                        <a class="text-white text-decoration-none text-uppercase"
+                                                          href="{{ route('categories.show', ['category' => $category->slug])}}"> {{ $category->name }}</a>
+                                                    </h5>
+                                                </div>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>

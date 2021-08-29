@@ -6,7 +6,9 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\CKEditorController;
+use App\Http\Controllers\ContactsController;
+use App\Http\Controllers\InformationController;
+use App\Http\Controllers\AdvertiseController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,6 +46,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'check_role'], function (){
     Route::resource('posts', PostController::class, ['as' =>'admin'])->except('show');
     Route::resources([
         'categories' => CategoryController::class,
+        'contacts' => ContactsController::class,
+        'advertises' => AdvertiseController::class,
+        'socials' => InformationController::class,
         'users' => UserController::class,
     ], ['as' => 'admin']);
 });

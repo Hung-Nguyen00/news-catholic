@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Categories;
 
 use App\Models\Category;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
@@ -44,18 +45,14 @@ class Showcategories extends Component
         $validatedData = $this->validate();
         if ($this->category_id != null && Category::find($this->category_id)){
             Category::create(array_merge($validatedData, ['parent_id' => $this->category_id]));
-            $this->showMessage('Tạo mới menu con thành công', 'success');
+            Toastr::success('Tạo mới thành công', 'Thành công');
         }else{
             Category::create($validatedData);
-            $this->showMessage('Tạo mới menu thành công', 'success');
+            Toastr::success('Tạo mới thành công', 'Thành công');
         }
         $this->resetInputFields();
     }
 
-    public function  showMessage($message, $type){
-        Session::flash('message', $message);
-        Session::flash('alert-class', 'alert-'.$type);
-    }
     // take value from interface
     public function edit($id){
         $this->category = Category::find($id);
@@ -77,19 +74,18 @@ class Showcategories extends Component
         $validatedData = $this->validate();
         if ($this->category){
             $this->category->update($validatedData);
-            $this->showMessage('Cập nhập menu thành công', 'success');
+            Toastr::success('Cập nhập thành công', 'Thành công');
         }else{
-            $this->showMessage('Không tìm thấy menu', 'danger');
+            Toastr::error('Không tìm thấy', 'Lỗi');
         }
-        $this->resetInputFields();
     }
 
     public function delete(){
         if ($this->category){
             $this->category->delete();
-            $this->showMessage('Xóa menu thành công', 'success');
+            Toastr::success('Xóa thành công', 'Thành công');
         }else{
-            $this->showMessage('Không tìm thấy menu', 'danger');
+            Toastr::error('Không tìm thấy', 'Lỗi');
         }
     }
 }
